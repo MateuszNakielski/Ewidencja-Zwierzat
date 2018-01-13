@@ -1,0 +1,52 @@
+<app-page [header]="zwierze.imie + ' | ID: ' + zwierze.nr">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-3 zdj">
+        <app-zdjecie [url]="'assets/kot.png'" [height]="'180px'"></app-zdjecie>
+      </div>
+      <div class="col-sm-9">
+        <div class="form-group row">
+          <p class="col-sm-2">Imię</p>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <p class="col-sm-2">Wiek</p>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <app-gatunek-rasa [mozliwyNull]="false" [label]="false" [labelClass]="'col-sm-2'" [inputClass]="'col-sm-10'"></app-gatunek-rasa>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 col-md-2">
+        <p>
+          Opis zwierzęcia
+        </p>
+      </div>
+      <div class="col-sm-9 col-md-10">
+        <app-text-input placeHolder="Podaj opis zwierzęcia..."></app-text-input>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 przycisk-top">
+        <app-przycisk [big]="true" [important]="true">Zapisz zmiany</app-przycisk>
+      </div>
+      <div class="col-sm-3 przycisk-top">
+        <app-przycisk [big]="true" [routerLink]="'../../'">Anuluj</app-przycisk>
+      </div>
+      <div class="col-sm-3 przycisk-top">
+        <app-przycisk [big]="true">Usuń</app-przycisk>
+      </div>
+      <div class="col-sm-3 przycisk-top">
+        <app-przycisk [big]="true">Adoptuj</app-przycisk>
+      </div>
+    </div>
+
+  </div>
+</app-page>

@@ -1,0 +1,32 @@
+@import '~styles.scss';
+
+ul {
+  list-style: none;
+  position: absolute;
+  top: 84px;
+  right: 15px;
+  width: 180px;
+  text-align: right;
+  box-shadow: 0 2px 3px rgba(40, 40, 40, 0.44);
+  margin-left: 0;
+  padding-left: 0;
+}
+
+li {
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: #e8eaeb;
+  padding: 4px 10px;
+  font-weight: 300;
+  border-bottom: 1px solid #F7FAFB;
+}
+
+li:last-child {
+  background-color: $important;
+}
+
+li:hover {
+  background-color: #F7FAFB;
+}
+
