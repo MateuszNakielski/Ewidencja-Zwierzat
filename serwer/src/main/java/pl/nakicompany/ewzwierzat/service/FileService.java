@@ -20,27 +20,41 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 
 @Service
-public class FileService {
+public class FileService implements IFileService{
 
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
     private final Path rootLocation = Paths.get("upload-dir");
 
-    public void store(MultipartFile file) {
+    @Override
+    public String store(MultipartFile file) {
         try {
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }
+
+        return "/files/"+file.getOriginalFilename();
     }
 
-    public void store(byte[] file, String fileName) {
+    @Override
+    public String store(byte[] file, String fileName) {
         try {
+            if(Files.exists(this.rootLocation.resolve(fileName))){
+                Integer tmp = 0;
+                String baseFileName = new String(fileName);
+                do{
+                    fileName = tmp+baseFileName;
+                    tmp++;
+                }while(Files.exists(this.rootLocation.resolve(fileName)));
+            }
             Files.copy(new ByteArrayInputStream(file), this.rootLocation.resolve(fileName));
+
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }
+        return "/files/"+fileName;
     }
-
+    @Override
     public Resource loadFile(String filename) {
         try {
             Path file = rootLocation.resolve(filename);
@@ -53,10 +67,6 @@ public class FileService {
         } catch (MalformedURLException e) {
             throw new RuntimeException("FAIL!");
         }
-    }
-
-    public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
     @PostConstruct

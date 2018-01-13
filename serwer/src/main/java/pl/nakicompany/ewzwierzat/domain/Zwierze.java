@@ -10,20 +10,24 @@ public class Zwierze {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(name="gatunek")
     private String gatunek;
 
     @Column(name="rodzaj")
-    private String rodzaj;
+    private String rasa;
 
     @Column(name="imie")
     private String imie;
 
     @Column(name="wiek")
-    private int wiek;
+    private Integer wiek;
 
-    @Column
+    @Column(name="image_url")
+    private String imageUrl;
+
+    @Column(name="opis")
+    private String opis;
 
 }
