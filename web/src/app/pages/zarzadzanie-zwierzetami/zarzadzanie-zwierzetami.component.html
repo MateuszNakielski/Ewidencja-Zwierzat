@@ -1,0 +1,21 @@
+<app-page [header]="'Zarządzanie zwierzętami'">
+  <div class="container">
+      <div class="row przycisk-top" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4"> <app-przycisk [routerLink]="'/zarzadzanie-zwierzetami/wyszukiwarka'" [big]="true">Wyszukiwarka</app-przycisk> </div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="row przycisk-top" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4"> <app-przycisk [routerLink]="'/zarzadzanie-zwierzetami/dodaj-zwierze'" [important]="true" [big]="true">Dodaj zwierzę</app-przycisk> </div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="row przycisk-top" >
+        <div class="col-md-4"></div>
+        <div class="col-md-4"> <app-przycisk [routerLink]="'/zarzadzanie-zwierzetami/wszystkie-zwierzeta'" [big]="true">Wszystkie zwierzęta</app-przycisk> </div>
+        <div class="col-md-4"></div>
+      </div>
+  </div>
+</app-page>

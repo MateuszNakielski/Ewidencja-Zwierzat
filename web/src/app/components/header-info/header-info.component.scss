@@ -1,0 +1,44 @@
+$wysokosc: 100px;
+
+.tlo {
+  background-color: #F7FAFB;
+  min-height: $wysokosc;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+h1 {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 400;
+  transition-duration: 0.3s;
+  line-height: 2.5rem;
+}
+
+p {
+  display: block;
+  text-align: center;
+  min-width: 100%;
+  font-size: 1rem;
+  max-height: $wysokosc;
+  transition-duration: 0.3s;
+}
+
+@media (min-width: 600px) {
+  .tlo {
+    justify-content: space-between;
+  }
+  h1 {
+    width: 220px;
+    font-size: 2.2rem;
+    margin-left: 6%;
+  }
+  p {
+    min-width: 200px;
+    font-size: 1.3rem;
+    margin-right: 6%;
+  }
+}

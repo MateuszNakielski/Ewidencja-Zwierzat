@@ -1,0 +1,10 @@
+<div class="tlo">
+  <img [src]="'./assets/logo.png'">
+</div>
+<div class="menu-phone" (click)="pokazMenu = true" *ngIf="uzytkownikZalogowany">
+  <div class="kladka"></div>
+  <div class="kladka important"></div>
+  <div class="kladka"></div>
+</div>
+
+<app-touch-menu *ngIf="pokazMenu" (clickOutside)="schowajMenu($event)" (click)="pokazMenu = false"></app-touch-menu>

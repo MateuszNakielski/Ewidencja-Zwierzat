@@ -1,0 +1,50 @@
+@import "~styles.scss";
+
+.tlo {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 100px;
+  margin-left: 12px;
+  transition-duration: 0.3s;
+}
+
+img {
+  height: 55px;
+}
+
+.menu-phone {
+  position: absolute;
+  width: 50px;
+  top: 24px;
+  right: 18px;
+  cursor: pointer;
+}
+
+.menu-phone:hover .kladka {
+  opacity: 0.9;
+}
+
+.menu-phone .kladka {
+  background-color: $default;
+  height: 8px;
+  margin: 4px 0;
+  border-radius: 6px;
+  transition-duration: 0.2s;
+}
+
+.important {
+  background-color: $important !important;
+}
+
+
+@media (min-width: 600px) {
+  .tlo {
+    height: 140px;
+    justify-content: center;
+  }
+
+  img {
+    height: 80px;
+  }
+}

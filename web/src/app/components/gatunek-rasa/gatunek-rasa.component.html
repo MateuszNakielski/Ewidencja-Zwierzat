@@ -1,0 +1,22 @@
+<div class="form-group row">
+  <label *ngIf="label" [class]="labelClass">Gatunek</label>
+  <p *ngIf="!label" [class]="labelClass">
+    Gatunek
+  </p>
+  <div [class]="inputClass">
+    <select class="form-control" (input)="onSelectGatunek($event)" [(ngModel)]="wybranyGatunek">
+      <option *ngFor="let g of gatunki" [value]="g" >{{g}}</option>
+    </select>
+  </div>
+</div>
+<div class="form-group row">
+  <label *ngIf="label" [class]="labelClass">Rasa</label>
+  <p *ngIf="!label" [class]="labelClass">
+    Rasa
+  </p>
+  <div [class]="inputClass">
+    <select class="form-control" [disabled]="wybranyGatunek === ''" (input)="onSelectRasa($event)">
+      <option *ngFor="let rasa of rasy let i = index" [value]="i" >{{rasa}}</option>
+    </select>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="content">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 ramka margin-phone" *ngFor="let zw of zwierzeta">
+        <div class="row">
+
+          <div class="col-sm-3">
+            <app-zdjecie [url]="'assets/kot.png'"></app-zdjecie>
+          </div>
+
+          <div class="col-sm-5 margin-phone">
+            <div class="tabela">
+              <div class="row wiersz">
+                <div class="col-xs-7 naglowek">
+                  Numer identyfikacyjny
+                </div>
+                <div class="col-xs-5 wartosc">
+                  {{zw.nr}}
+                </div>
+              </div>
+
+              <div class="row wiersz">
+                <div class="col-xs-7 naglowek">
+                  Imię
+                </div>
+                <div class="col-xs-5 wartosc">
+                  {{zw.imie}}
+                </div>
+              </div>
+
+              <div class="row wiersz">
+                <div class="col-xs-7 naglowek">
+                  Wiek
+                </div>
+                <div class="col-xs-5 wartosc">
+                  {{zw.wiek}}
+                </div>
+              </div>
+
+              <div class="row wiersz">
+                <div class="col-xs-7 naglowek">
+                  Gatunek
+                </div>
+                <div class="col-xs-5 wartosc">
+                  {{zw.gatunek}}
+                </div>
+              </div>
+
+              <div class="row wiersz">
+                <div class="col-xs-7 naglowek">
+                  Rasa
+                </div>
+                <div class="col-xs-5 wartosc">
+                  {{zw.rasa}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 margin-phone">
+            <app-przycisk [big]="true" class="przycisk">Wyświetl całość</app-przycisk>
+            <app-przycisk [big]="true" [routerLink]="'../edycja/' + zw.nr" class="przycisk" [important]="true">Edytuj dane</app-przycisk>
+            <app-przycisk [big]="true" class="przycisk last">Adopcja</app-przycisk>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
