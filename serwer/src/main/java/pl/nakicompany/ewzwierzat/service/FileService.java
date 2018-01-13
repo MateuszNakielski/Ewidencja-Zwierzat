@@ -1,6 +1,7 @@
 package pl.nakicompany.ewzwierzat.service;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +28,14 @@ public class FileService {
     public void store(MultipartFile file) {
         try {
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+        } catch (Exception e) {
+            throw new RuntimeException("FAIL!");
+        }
+    }
+
+    public void store(byte[] file, String fileName) {
+        try {
+            Files.copy(new ByteArrayInputStream(file), this.rootLocation.resolve(fileName));
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }
