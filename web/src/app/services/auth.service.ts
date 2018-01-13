@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
-import {AsyncLocalStorage} from 'angular-async-local-storage';
 import {User} from '../model/user';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private router: Router, private localStorage: AsyncLocalStorage) { }
+  constructor(private router: Router) { }
 
   zaloguj(login: string, haslo: string) {
-    this.localStorage.setItem('user', new User(login, haslo)).subscribe(() => {
-      this.localStorage.getItem('user').subscribe(usr => {
-        if (usr != null && usr.haslo !== '' && usr.login !== '') {
-          this.localStorage.setItem('logged', true).subscribe(() => {
-            this.router.navigate(['/zarzadzanie-zwierzetami']);
-          });
-        }
-      });
-    });
+    const usr = new User(login, haslo);
+    if (usr.haslo !== '' && usr.login !== '') {
+      localStorage.setItem('user', JSON.stringify(usr));
+      localStorage.setItem('logged', JSON.stringify(true));
+      this.router.navigate(['/zarzadzanie-zwierzetami']);
+    }
   }
 
   wyloguj() {
-    this.localStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 
-  zalogowano(): Observable<boolean> {
-    return this.localStorage.getItem('logged');
+  podajUzytkownika(): User {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  zalogowano(): boolean {
+    let czyZalogowano = JSON.parse(localStorage.getItem('logged'));
+    if (czyZalogowano == null) {
+      czyZalogowano = false;
+    }
+    return czyZalogowano;
   }
 
 }

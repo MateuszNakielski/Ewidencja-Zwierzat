@@ -13,9 +13,7 @@ export class HeaderMenuComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.zalogowano().subscribe(log => {
-      this.uzytkownikZalogowany = log;
-    });
+    this.uzytkownikZalogowany = this.auth.zalogowano();
   }
 
   schowajMenu(el) {

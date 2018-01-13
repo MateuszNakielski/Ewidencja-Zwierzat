@@ -10,7 +10,7 @@ export class AuthGuardLoginPage implements CanActivate {
 
   }
 
-  canActivate() {
+  canActivate(): boolean {
     if (this.authService.zalogowano()) {
       this.router.navigate(['/zarzadzanie-zwierzetami']);
       return false;
