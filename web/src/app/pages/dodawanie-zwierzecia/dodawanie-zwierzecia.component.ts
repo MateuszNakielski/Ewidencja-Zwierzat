@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {StateService} from '../../services/state.service';
+import {FileService} from '../../services/file.service';
+import {Zwierze} from '../../model/zwierze';
+import {ZwierzeService} from '../../services/zwierze.service';
+import {ZwierzeParam} from '../../model/zwierzeParam';
+import {UtworzZwierzeRequest} from '../../model/rest/zwierze/utworzZwierzeRequest';
+import {Plik} from '../../model/plik';
 
 @Component({
   selector: 'app-dodawanie-zwierzecia',
@@ -7,14 +13,20 @@ import {StateService} from '../../services/state.service';
   styleUrls: ['./dodawanie-zwierzecia.component.scss']
 })
 export class DodawanieZwierzeciaComponent implements OnInit {
-
-  constructor(private stateServ: StateService) { }
+  @ViewChild('fileInput') fileInput;
 
   imie: string;
-  wiek: string;
+  wiek: number;
   rasa: string;
   gatunek: string;
   opis: string;
+  plik: Plik;
+
+  dodanieTrue = false;
+  dodanieFalse = false;
+  komunikatBad = 'Błąd danych formularza';
+
+  constructor(private stateServ: StateService, private fileServ: FileService, private zwierzeServ: ZwierzeService) { }
 
   ngOnInit() {
   }
@@ -31,12 +43,52 @@ export class DodawanieZwierzeciaComponent implements OnInit {
     this.opis = opis;
   }
 
+  podajPlik(plik) {
+    this.plik = plik;
+  }
+
+  dodajZwierze() {
+    const zw = new UtworzZwierzeRequest();
+    zw.zwierze = new Zwierze();
+    zw.zwierze.imie = this.imie;
+    zw.zwierze.wiek = this.wiek;
+    zw.zwierze.gatunek = this.gatunek;
+    zw.zwierze.rasa = this.rasa;
+    zw.zwierze.opis = this.opis;
+    zw.zwierzeFoto = this.plik;
+    if (this.waliduj()) {
+      this.zwierzeServ.dodajZwierze(zw).subscribe(r => {
+        console.log(r);
+        this.dodanieTrue = true;
+        this.dodanieFalse = false;
+      }, err => console.log(err));
+    } else {
+      this.dodanieTrue = false;
+      this.dodanieFalse = true;
+    }
+  }
+
+  waliduj(): boolean {
+    if (!this.imie || !this.wiek || !this.gatunek || !this.rasa) {
+      this.komunikatBad = 'Należy uzupełnić wszystkie pola formularza';
+      return false;
+    }
+    if (this.plik == null || !this.plik.fileName || !this.plik.fileContent) {
+      this.komunikatBad = 'Zdjęcie zwierzęcia jest wymagane.';
+      return false;
+    }
+    if (isNaN(this.wiek)) {
+      this.komunikatBad = 'Podano niepopraną wartość wieku.';
+      return false;
+    }
+    return true;
+  }
+
   wyczysc() {
-    console.log(this.imie + this.wiek + this.rasa + this.gatunek);
     this.imie = '';
-    this.wiek = '';
+    this.wiek = null;
+    this.plik = null;
     this.stateServ.ustawStan('inputClear');
-    console.log(this.imie + this.wiek + this.rasa + this.gatunek);
   }
 
 }

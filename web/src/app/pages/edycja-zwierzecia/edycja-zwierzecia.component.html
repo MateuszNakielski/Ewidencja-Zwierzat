@@ -1,24 +1,26 @@
-<app-page [header]="zwierze.imie + ' | ID: ' + zwierze.nr">
+<app-page [header]="zwierze.imie + ' | ID: ' + zwierze.id">
   <div class="container">
-
+    <app-komunikat [good]="true" *ngIf="edycjaTrue">Edycja zwierzęcia przebiegła pomyślnie.</app-komunikat>
+    <app-komunikat [bad]="true" *ngIf="edycjaFalse">{{komunikatBad}}</app-komunikat>
     <div class="row">
-      <div class="col-sm-3 zdj">
-        <app-zdjecie [url]="'assets/kot.png'" [height]="'180px'"></app-zdjecie>
+      <div class="col-sm-3">
+        <app-zdjecie [url]="url + zwierze.fotoUrl" [height]="'180px'"></app-zdjecie>
+        <app-file-input [maly]="true" (onChangeFile)="ustawZdjecie($event)"></app-file-input>
       </div>
       <div class="col-sm-9">
         <div class="form-group row">
           <p class="col-sm-2">Imię</p>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" [(ngModel)]="imie">
           </div>
         </div>
         <div class="form-group row">
           <p class="col-sm-2">Wiek</p>
           <div class="col-sm-10">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" [(ngModel)]="wiek">
           </div>
         </div>
-        <app-gatunek-rasa [mozliwyNull]="false" [label]="false" [labelClass]="'col-sm-2'" [inputClass]="'col-sm-10'"></app-gatunek-rasa>
+        <app-gatunek-rasa #gatunekRasa (onWyborGatunku)="wyborGatunku($event)" (onWyborRasy)="wyborRasy($event)" [wybranaRasa]="zwierze.rasa" [wybranyGatunek]="zwierze.gatunek" [mozliwyNull]="false" [label]="false" [labelClass]="'col-sm-2'" [inputClass]="'col-sm-10'"></app-gatunek-rasa>
       </div>
     </div>
 
@@ -29,13 +31,13 @@
         </p>
       </div>
       <div class="col-sm-9 col-md-10">
-        <app-text-input placeHolder="Podaj opis zwierzęcia..."></app-text-input>
+        <app-text-input placeHolder="Podaj opis zwierzęcia..." (onTextInput)="zmienOpis($event)" [wartosc]="zwierze.opis"></app-text-input>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-3 przycisk-top">
-        <app-przycisk [big]="true" [important]="true">Zapisz zmiany</app-przycisk>
+        <app-przycisk [big]="true" (click)="zapiszZmiany()" [important]="true">Zapisz zmiany</app-przycisk>
       </div>
       <div class="col-sm-3 przycisk-top">
         <app-przycisk [big]="true" [routerLink]="'../../'">Anuluj</app-przycisk>

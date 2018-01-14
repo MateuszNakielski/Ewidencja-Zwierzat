@@ -15,8 +15,8 @@
     Rasa
   </p>
   <div [class]="inputClass">
-    <select class="form-control" [disabled]="wybranyGatunek === ''" (input)="onSelectRasa($event)">
-      <option *ngFor="let rasa of rasy let i = index" [value]="i" >{{rasa}}</option>
+    <select class="form-control" [disabled]="wybranyGatunek === ''" [(ngModel)]="wybranaRasa" (input)="onSelectRasa($event)">
+      <option *ngFor="let rasa of rasy let i = index" [value]="rasa" >{{rasa}}</option>
     </select>
   </div>
 </div>

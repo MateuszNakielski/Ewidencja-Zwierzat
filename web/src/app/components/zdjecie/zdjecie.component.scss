@@ -1,8 +1,11 @@
+@import '~styles.scss';
+
 .zdjecie {
   box-sizing: border-box;
   height: 160px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  box-shadow: 0 2px 3px rgba(30, 30, 30, 0.40);
+  border: 1px solid #A9A9A9;
+  border-radius: 3px;
 }

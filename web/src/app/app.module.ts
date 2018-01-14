@@ -27,6 +27,14 @@ import {AuthGuard} from './services/auth-guard';
 import {AuthService} from './services/auth.service';
 import {AuthGuardLoginPage} from './services/auth-guard-login-page';
 import {AsyncLocalStorageModule} from 'angular-async-local-storage';
+import {FileService} from './services/file.service';
+import { FileInputComponent } from './components/file-input/file-input.component';
+import {HttpClientModule} from '@angular/common/http';
+import {ZwierzeService} from './services/zwierze.service';
+import {RestService} from './services/rest.service';
+import { KomunikatComponent } from './components/komunikat/komunikat.component';
+import { WczytywanieComponent } from './components/wczytywanie/wczytywanie.component';
+import { ZwierzeComponent } from './pages/zwierze/zwierze.component';
 
 @NgModule({
   declarations: [
@@ -46,19 +54,24 @@ import {AsyncLocalStorageModule} from 'angular-async-local-storage';
     TextInputComponent,
     WszystkieZwierzetaComponent,
     TouchMenuComponent,
-    LogowanieComponent
+    LogowanieComponent,
+    FileInputComponent,
+    KomunikatComponent,
+    WczytywanieComponent,
+    ZwierzeComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     ClickOutsideModule,
     AsyncLocalStorageModule,
     RouterModule.forRoot(
       appRoutes
     )
   ],
-  providers: [StateService, AuthService, AuthGuardLoginPage, AuthGuard],
+  providers: [RestService, StateService, AuthService, AuthGuardLoginPage, AuthGuard, FileService, ZwierzeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

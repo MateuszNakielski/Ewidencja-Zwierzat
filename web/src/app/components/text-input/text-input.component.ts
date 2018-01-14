@@ -8,12 +8,9 @@ import {StateService} from '../../services/state.service';
 })
 export class TextInputComponent implements OnInit {
   @Input() placeHolder = '';
-  @Input() wartoscPoczatkowa = '';
-  wartosc: string;
+  @Input() wartosc: string;
   @Output() onTextInput = new EventEmitter();
-  constructor(private stateServ: StateService) {
-    this.wartosc = this.wartoscPoczatkowa;
-  }
+  constructor(private stateServ: StateService) {}
 
   ngOnInit() {
     this.stateServ.podajObecnyStan().subscribe(stan => {

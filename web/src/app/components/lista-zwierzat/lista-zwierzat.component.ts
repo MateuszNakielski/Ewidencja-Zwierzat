@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Zwierze} from '../../model/zwierze';
+import {RestService} from '../../services/rest.service';
 
 @Component({
   selector: 'app-lista-zwierzat',
@@ -10,9 +11,12 @@ export class ListaZwierzatComponent implements OnInit {
 
   @Input() zwierzeta: Zwierze[];
 
-  constructor() { }
+  url = '';
+
+  constructor(public rest: RestService) { }
 
   ngOnInit() {
+    this.url = this.rest.url;
   }
 
 }

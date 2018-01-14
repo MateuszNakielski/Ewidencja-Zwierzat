@@ -8,6 +8,7 @@ import {WszystkieZwierzetaComponent} from './pages/wszystkie-zwierzeta/wszystkie
 import {LogowanieComponent} from './pages/logowanie/logowanie.component';
 import {AuthGuard} from './services/auth-guard';
 import {AuthGuardLoginPage} from './services/auth-guard-login-page';
+import {ZwierzeComponent} from './pages/zwierze/zwierze.component';
 
 export const appRoutes: Routes = [
   {
@@ -32,6 +33,14 @@ export const appRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {
       path: 'Strona główna / Zarządzanie zwierzętami / Edycja'
+    }
+  },
+  {
+    path: 'zarzadzanie-zwierzetami/szczegoly-zwierzecia/:id',
+    component: ZwierzeComponent,
+    canActivate: [AuthGuard],
+    data: {
+      path: 'Strona główna / Zarządzanie zwierzętami / Szczegóły zwierzęcia'
     }
   },
   {

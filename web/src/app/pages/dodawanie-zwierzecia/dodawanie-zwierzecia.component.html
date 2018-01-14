@@ -1,5 +1,7 @@
 <app-page [header]="'Dodaj zwierzę'">
   <div class="container">
+    <app-komunikat [good]="true" *ngIf="dodanieTrue">Pomyślnie dodano zwierzę.</app-komunikat>
+    <app-komunikat [bad]="true" *ngIf="dodanieFalse">{{komunikatBad}}</app-komunikat>
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="form-group row">
@@ -14,13 +16,16 @@
             <input type="text" [(ngModel)]="wiek" class="form-control">
           </div>
         </div>
-        <app-gatunek-rasa (onWyborRasy)="ustawRase($event)" (onWyborGatunku)="ustawGatunek($event)" [label]="false" labelClass="col-sm-2" inputClass="col-sm-10"></app-gatunek-rasa>
+        <app-gatunek-rasa [mozliwyNull]="false" (onWyborRasy)="ustawRase($event)" (onWyborGatunku)="ustawGatunek($event)" [label]="false" labelClass="col-sm-2" inputClass="col-sm-10"></app-gatunek-rasa>
         <div class="row">
           <div class="col-sm-2">
             Opis zwierzęcia
             <hr>
             <div>
               Zdjęcie
+            </div>
+            <div>
+              <app-file-input (onChangeFile)="podajPlik($event)"></app-file-input>
             </div>
           </div>
           <div class="col-sm-10">
@@ -30,7 +35,7 @@
 
         <div class="row">
           <div class="col-sm-6 przycisk-top">
-            <app-przycisk [big]="true" [important]="true">Dodaj zwierzę</app-przycisk>
+            <app-przycisk [big]="true" [important]="true" (click)="dodajZwierze()">Dodaj zwierzę</app-przycisk>
           </div>
           <div class="col-sm-6 przycisk-top">
             <app-przycisk [big]="true" (click)="wyczysc()">Wyczyść pola</app-przycisk>
