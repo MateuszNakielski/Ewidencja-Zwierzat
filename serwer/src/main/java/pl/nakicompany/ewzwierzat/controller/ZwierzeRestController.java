@@ -31,8 +31,8 @@ public class ZwierzeRestController {
     @ResponseBody
     @RequestMapping(value = "",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> utworzZwierze(@RequestBody UtworzZwierzeRequestDTO utworzZwierzeRequestDTO){
         UtworzZwierzeResponseDTO utworzZwierzeResponseDTO;
         try {
@@ -48,7 +48,7 @@ public class ZwierzeRestController {
     @ResponseBody
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> pobierzZwierze(@PathVariable("id") Long id){
         ZwierzeDTO zwierzeDTO;
         try {
@@ -64,7 +64,7 @@ public class ZwierzeRestController {
     @ResponseBody
     @RequestMapping(value = "",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> pobierzZwierzeta(
             @RequestParam(required = false) String gatunek,
             @RequestParam(required = false) String rasa,
@@ -80,7 +80,7 @@ public class ZwierzeRestController {
     @ResponseBody
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> usunZwierze(@PathVariable("id") Long id){
         try {
             zwierzeService.usunZwierze(id);
@@ -93,7 +93,7 @@ public class ZwierzeRestController {
     @ResponseBody
     @RequestMapping(value = "/{id}",
             method = RequestMethod.PUT,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> EdytujZwierze(
             @PathVariable("id") Long id,
             @RequestBody EdytujZwierzeRequestDTO edytujZwierzeRequestDTO){
