@@ -22,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/zwierze")
+@CrossOrigin
 public class ZwierzeRestController {
 
     @Autowired

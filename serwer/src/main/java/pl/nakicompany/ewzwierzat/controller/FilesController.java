@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Controller
-
+@CrossOrigin
 public class FilesController {
 
     @Autowired
