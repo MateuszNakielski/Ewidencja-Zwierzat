@@ -30,6 +30,11 @@ export class ZwierzeService {
     return this.http.get<PobierzZwierzeResponse>(url);
   }
 
+  usunZwierze(id: number) {
+    const url = this.urlZwierze + '/' + id;
+    return this.http.delete(url);
+  }
+
   dodajZwierze(utworzZwierzeRequest: UtworzZwierzeRequest): Observable<UtworzZwierzeResponse> {
     return this.http.post<UtworzZwierzeResponse>(this.urlZwierze, utworzZwierzeRequest);
   }

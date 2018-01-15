@@ -1,8 +1,8 @@
 <div class="tlo">
-  <h1>
+  <h1 [style.width]="headerWidth">
     <ng-content></ng-content>
   </h1>
   <p>
-    {{ path }}
+    <a *ngIf="path != 'Logowanie do systemu'"> Strona główna</a><span *ngIf="path != 'Logowanie do systemu'"> / </span><a *ngIf="path != 'Logowanie do systemu'" (click)="doZarzadzania()" [class.blockhover]="path == ''">Zarządzanie Zwierzętami </a> {{ path }}
   </p>
 </div>

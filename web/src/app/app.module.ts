@@ -35,6 +35,8 @@ import {RestService} from './services/rest.service';
 import { KomunikatComponent } from './components/komunikat/komunikat.component';
 import { WczytywanieComponent } from './components/wczytywanie/wczytywanie.component';
 import { ZwierzeComponent } from './pages/zwierze/zwierze.component';
+import {ListaAdopcjiComponent} from './pages/lista-adopcji/lista-adopcji.component';
+import { FormularzAdopcjiComponent } from './pages/formularz-adopcji/formularz-adopcji.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { ZwierzeComponent } from './pages/zwierze/zwierze.component';
     FileInputComponent,
     KomunikatComponent,
     WczytywanieComponent,
-    ZwierzeComponent
+    ZwierzeComponent,
+    ListaAdopcjiComponent,
+    FormularzAdopcjiComponent
   ],
   imports: [
     BrowserModule,

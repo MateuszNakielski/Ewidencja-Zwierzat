@@ -1,11 +1,12 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {Zwierze} from '../../model/zwierze';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RestService} from '../../services/rest.service';
 import {ZwierzeService} from '../../services/zwierze.service';
 import {EdytujZwierzeResponse} from '../../model/rest/zwierze/edytujZwierzeResponse';
 import {EdytujZwierzeRequest} from '../../model/rest/zwierze/edytujZwierzeRequest';
 import {Plik} from '../../model/plik';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edycja-zwierzecia',
@@ -30,7 +31,7 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
   edycjaFalse = false;
   komunikatBad = 'Błąd danych formularza';
 
-  constructor(private route: ActivatedRoute, private rest: RestService, private zwServ: ZwierzeService) {
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private rest: RestService, private zwServ: ZwierzeService) {
     this.zwierze = new Zwierze();
   }
 
@@ -45,7 +46,10 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
         this.gatunek = this.zwierze.gatunek;
         this.rasa = this.zwierze.rasa;
         this.opis = this.zwierze.opis;
-      }, err => console.log(err));
+      }, err => {
+        console.log(err);
+        this.router.navigate(['/zarzadzanie-zwierzetami']);
+      });
     });
   }
 
@@ -63,6 +67,15 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
 
   wyborRasy(r) {
     this.rasa = r;
+  }
+
+  usunZwierze() {
+    this.zwServ.usunZwierze(this.zwierze.id).subscribe(res => {
+      this.router.navigate(['zarzadzanie-zwierzetami/wszystkie-zwierzeta']);
+    }, err => {
+      this.komunikatBad = 'Błąd serwera.';
+      this.edycjaFalse = true;
+    });
   }
 
   zapiszZmiany() {
@@ -93,7 +106,7 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
 
   waliduj(): boolean {
     if (!this.imie || !this.wiek || !this.gatunek || !this.rasa) {
-      this.komunikatBad = 'Należy uzupełnić wszystkie pola formularza';
+      this.komunikatBad = 'Należy uzupełnić wszystkie wymagane pola formularza';
       return false;
     }
     if (isNaN(this.wiek)) {
@@ -113,6 +126,8 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
     this.edycjaFalse = true;
   }
 
-
+  goBack() {
+    this.location.back();
+  }
 
 }

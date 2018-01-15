@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Zwierze} from '../../model/zwierze';
 import {ZwierzeService} from '../../services/zwierze.service';
 import {PageComponent} from '../../components/page/page.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-wszystkie-zwierzeta',

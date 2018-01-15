@@ -1,52 +1,77 @@
 <app-page [header]="zwierze.imie + ' | ID: ' + zwierze.id">
   <div class="container">
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-2">
-        <app-zdjecie [url]="url + zwierze.fotoUrl" [height]="'180px'"></app-zdjecie>
+      <div class="col-sm-4 col-md-3">
+        <app-zdjecie [url]="url + zwierze.fotoUrl" [height]="'220px'"></app-zdjecie>
       </div>
+      <div class="col-sm-8 przycisk-top">
+            <div class="row">
+              <p class="col-xs-2">Imię:</p>
+              <div class="col-xs-10">
+                <b>{{zwierze.imie}}</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col-xs-2">Wiek:</p>
+              <div class="col-xs-10">
+                <b>{{zwierze.wiek}}</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col-xs-2">Gatunek:</p>
+              <div class="col-xs-10">
+                <b>{{zwierze.gatunek}}</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col-xs-2">Rasa:</p>
+              <div class="col-xs-10">
+                <b>{{zwierze.rasa}}</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col-xs-2">Numer CZIP:</p>
+              <div class="col-xs-10">
+                <b>nrczip</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col-xs-2">Numer rejestru:</p>
+              <div class="col-xs-10">
+                <b>{{zwierze.id}}</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <p class="col-xs-2">Cechy:</p>
+              <div class="col-xs-10">
+                <b>Cechy szczególne...</b>
+              </div>
+            </div>
+          </div>
     </div>
+
     <div class="row przycisk-top">
-      <div class="col-sm-4 col-sm-offset-2">
-        <div class="row">
-          <p class="col-xs-2">Imię:</p>
-          <div class="col-xs-10">
-            <b>{{zwierze.imie}}</b>
-          </div>
-        </div>
-
-        <div class="row">
-          <p class="col-xs-2">Wiek:</p>
-          <div class="col-xs-10">
-            <b>{{zwierze.wiek}}</b>
-          </div>
-        </div>
-
-        <div class="row">
-          <p class="col-xs-2">Gatunek:</p>
-          <div class="col-xs-10">
-            <b>{{zwierze.gatunek}}</b>
-          </div>
-        </div>
-
-        <div class="row">
-          <p class="col-xs-2">Rasa:</p>
-          <div class="col-xs-10">
-            <b>{{zwierze.rasa}}</b>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-2" *ngIf="zwierze.opis">
-        <p class="row">Opis:</p>
+      <div class="col-sm-12" *ngIf="zwierze.opis">
+        <p>Opis:</p>
         <p>{{zwierze.opis}}</p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-offset-2 col-sm-4 przycisk-top">
-        <app-przycisk [big]="true" [important]="true" [routerLink]="'../../'">Powrót</app-przycisk>
+      <div class="col-sm-4 przycisk-top">
+        <app-przycisk [big]="true" [important]="true" [routerLink]="'../../dodawanie-adopcji/' + zwierze.id">Adoptuj</app-przycisk>
       </div>
       <div class="col-sm-4 przycisk-top">
-        <app-przycisk [big]="true">Adoptuj</app-przycisk>
+        <app-przycisk [big]="true" [important]="true" [routerLink]="'../../edycja/' + zwierze.id">Edytuj</app-przycisk>
+      </div>
+      <div class="col-sm-4 przycisk-top">
+        <app-przycisk [big]="true" (click)="goBack()">Powrót</app-przycisk>
       </div>
     </div>
 

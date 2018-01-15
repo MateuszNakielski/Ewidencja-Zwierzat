@@ -6,7 +6,9 @@ export class Zwierze {
   public id: number;
   public fotoUrl: string;
   public opis: string;
-
+  public numerRejestru: string;
+  public numerCZIP: string;
+  public cechySzczegolne: string;
   constructor() {
   }
 }

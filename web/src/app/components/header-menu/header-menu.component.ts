@@ -16,6 +16,10 @@ export class HeaderMenuComponent implements OnInit {
     this.uzytkownikZalogowany = this.auth.zalogowano();
   }
 
+  onWylogujClick() {
+    this.auth.wyloguj();
+  }
+
   schowajMenu(el) {
     console.log(el);
     if (!el.srcElement.className.includes('menu-phone') && !el.srcElement.className.includes('kladka')) {

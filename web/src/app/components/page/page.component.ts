@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PageComponent implements OnInit {
   @Input() header = '';
+  @Input() headerWidth;
   @Input() wczytywanie = false;
   constructor() { }
 

@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Zwierze} from '../../model/zwierze';
 import {RestService} from '../../services/rest.service';
+import {PageComponent} from '../page/page.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-lista-zwierzat',
@@ -13,10 +15,14 @@ export class ListaZwierzatComponent implements OnInit {
 
   url = '';
 
-  constructor(public rest: RestService) { }
+  constructor(private location: Location, public rest: RestService) { }
 
   ngOnInit() {
     this.url = this.rest.url;
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

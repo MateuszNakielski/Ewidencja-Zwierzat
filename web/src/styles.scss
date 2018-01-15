@@ -5,11 +5,15 @@
   color: #373737;
 }
 
-$important: #ffc02e;
+$important: #f0b62b;
 $default: #808080;
 
 app-przycisk {
   outline: 0;
+}
+
+.star {
+  color: red;
 }
 
 img {

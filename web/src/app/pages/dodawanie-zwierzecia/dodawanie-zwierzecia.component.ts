@@ -6,6 +6,7 @@ import {ZwierzeService} from '../../services/zwierze.service';
 import {ZwierzeParam} from '../../model/zwierzeParam';
 import {UtworzZwierzeRequest} from '../../model/rest/zwierze/utworzZwierzeRequest';
 import {Plik} from '../../model/plik';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-dodawanie-zwierzecia',
@@ -26,7 +27,7 @@ export class DodawanieZwierzeciaComponent implements OnInit {
   dodanieFalse = false;
   komunikatBad = 'Błąd danych formularza';
 
-  constructor(private stateServ: StateService, private fileServ: FileService, private zwierzeServ: ZwierzeService) { }
+  constructor(private location: Location, private stateServ: StateService, private fileServ: FileService, private zwierzeServ: ZwierzeService) { }
 
   ngOnInit() {
   }
@@ -70,7 +71,7 @@ export class DodawanieZwierzeciaComponent implements OnInit {
 
   waliduj(): boolean {
     if (!this.imie || !this.wiek || !this.gatunek || !this.rasa) {
-      this.komunikatBad = 'Należy uzupełnić wszystkie pola formularza';
+      this.komunikatBad = 'Należy uzupełnić wszystkie wymagane pola formularza';
       return false;
     }
     if (this.plik == null || !this.plik.fileName || !this.plik.fileContent) {
@@ -89,6 +90,10 @@ export class DodawanieZwierzeciaComponent implements OnInit {
     this.wiek = null;
     this.plik = null;
     this.stateServ.ustawStan('inputClear');
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

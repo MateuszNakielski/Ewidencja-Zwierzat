@@ -4,25 +4,44 @@
     <app-komunikat [bad]="true" *ngIf="dodanieFalse">{{komunikatBad}}</app-komunikat>
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
+        <span class="star">*</span> - pole wymagane.
+      <hr>
+
         <div class="form-group row">
-          <p class="col-sm-2">Imię</p>
+          <p class="col-sm-2">Imię<span class="star">*</span></p>
           <div class="col-sm-10">
             <input type="text" [(ngModel)]="imie" class="form-control">
           </div>
         </div>
         <div class="form-group row">
-          <p class="col-sm-2">Wiek</p>
+          <p class="col-sm-2">Wiek<span class="star">*</span></p>
           <div class="col-sm-10">
-            <input type="text" [(ngModel)]="wiek" class="form-control">
+            <input type="number" [(ngModel)]="wiek" class="form-control">
           </div>
         </div>
+
         <app-gatunek-rasa [mozliwyNull]="false" (onWyborRasy)="ustawRase($event)" (onWyborGatunku)="ustawGatunek($event)" [label]="false" labelClass="col-sm-2" inputClass="col-sm-10"></app-gatunek-rasa>
+
+        <div class="form-group row">
+          <p class="col-sm-2">Numer CZIP<span class="star">*</span></p>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <p class="col-sm-2">Cechy szczególne</p>
+          <div class="col-sm-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-sm-2">
             Opis zwierzęcia
             <hr>
             <div>
-              Zdjęcie
+              Zdjęcie<span class="star">*</span>
             </div>
             <div>
               <app-file-input (onChangeFile)="podajPlik($event)"></app-file-input>
@@ -34,11 +53,14 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-6 przycisk-top">
+          <div class="col-sm-4 przycisk-top">
             <app-przycisk [big]="true" [important]="true" (click)="dodajZwierze()">Dodaj zwierzę</app-przycisk>
           </div>
-          <div class="col-sm-6 przycisk-top">
+          <div class="col-sm-4 przycisk-top">
             <app-przycisk [big]="true" (click)="wyczysc()">Wyczyść pola</app-przycisk>
+          </div>
+          <div class="col-sm-4 przycisk-top">
+            <app-przycisk [big]="true" (click)="goBack()">Powrót</app-przycisk>
           </div>
         </div>
 

@@ -22,6 +22,18 @@ img {
   cursor: pointer;
 }
 
+.wyloguj-sie {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: #D99E1A;
+  cursor: pointer;
+}
+
+.wyloguj-sie:hover {
+  color: $important;
+}
+
 .menu-phone:hover .kladka {
   opacity: 0.9;
 }

@@ -1,0 +1,88 @@
+<app-page [header]="'Lista adopcji'">
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <app-komunikat *ngIf="adopcje.length == 0" [bad]="true">
+            Brak adopcji.
+          </app-komunikat>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="adopcje.length != 0">
+        <div class="col-md-10 col-md-offset-1 ramka margin-phone" *ngFor="let a of adopcje">
+          <div class="row">
+
+            <div class="col-sm-3">
+          <!--    <app-zdjecie [url]="url + a.fotoUrl"></app-zdjecie>-->
+            </div>
+
+            <div class="col-sm-5 margin-phone">
+              <div class="tabela">
+                <div class="row wiersz">
+                  <div class="col-xs-7 naglowek">
+                    Numer dokumentu
+                  </div>
+                  <div class="col-xs-5 wartosc">
+
+                  </div>
+                </div>
+
+                <div class="row wiersz">
+
+                  <div class="col-xs-7 naglowek">
+                    Numer zwierzęcia
+                  </div>
+                  <div class="col-xs-5 wartosc">
+
+                  </div>
+                </div>
+
+                <div class="row wiersz">
+                  <div class="col-xs-7 naglowek">
+                    Imię zwierzęcia
+                  </div>
+                  <div class="col-xs-5 wartosc">
+
+                  </div>
+                </div>
+
+                <div class="row wiersz">
+                  <div class="col-xs-7 naglowek">
+                    Adoptujący
+                  </div>
+                  <div class="col-xs-5 wartosc">
+
+                  </div>
+                </div>
+
+                <div class="row wiersz">
+                  <div class="col-xs-7 naglowek">
+                    Adres email
+                  </div>
+                  <div class="col-xs-5 wartosc">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 margin-phone">
+              <app-przycisk [big]="true" [routerLink]="'../szczegoly-zwierzecia/' + a.id" class="przycisk">Wydrukuj</app-przycisk>
+              <app-przycisk [big]="true" [routerLink]="'../edycja-adopcji/' + a.id" class="przycisk" [important]="true">Edytuj dane</app-przycisk>
+              <app-przycisk [big]="true" class="przycisk last">Usuń</app-przycisk>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row przycisk-top">
+        <div class="col-md-10 col-md-offset-1">
+          <app-przycisk [big]="true" [important]="true" (click)="goBack()">Powrót</app-przycisk>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</app-page>
+

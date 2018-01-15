@@ -9,14 +9,40 @@ import {LogowanieComponent} from './pages/logowanie/logowanie.component';
 import {AuthGuard} from './services/auth-guard';
 import {AuthGuardLoginPage} from './services/auth-guard-login-page';
 import {ZwierzeComponent} from './pages/zwierze/zwierze.component';
+import {ListaAdopcjiComponent} from './pages/lista-adopcji/lista-adopcji.component';
+import {FormularzAdopcjiComponent} from './pages/formularz-adopcji/formularz-adopcji.component';
 
 export const appRoutes: Routes = [
+  {
+    path: 'zarzadzanie-zwierzetami/edycja-adopcji/:id',
+    component: FormularzAdopcjiComponent,
+    canActivate: [AuthGuard],
+    data: {
+      path: '/ Edycja adopcji'
+    }
+  },
+  {
+    path: 'zarzadzanie-zwierzetami/dodawanie-adopcji/:id',
+    component: FormularzAdopcjiComponent,
+    canActivate: [AuthGuard],
+    data: {
+      path: '/ Dodawanie adopcji'
+    }
+  },
+  {
+    path: 'zarzadzanie-zwierzetami/lista-adopcji',
+    component: ListaAdopcjiComponent,
+    canActivate: [AuthGuard],
+    data: {
+      path: '/ Lista adopcji'
+    }
+  },
   {
     path: 'zarzadzanie-zwierzetami/wyszukiwarka',
     component: WyszukiwarkaComponent,
     canActivate: [AuthGuard],
     data: {
-      path: 'Strona główna / Zarządzanie zwierzętami / Wyszukiwarka'
+      path: '/ Wyszukiwarka'
     }
   },
   {
@@ -24,7 +50,7 @@ export const appRoutes: Routes = [
     component: WszystkieZwierzetaComponent,
     canActivate: [AuthGuard],
     data: {
-      path: 'Strona główna / Zarządzanie zwierzętami / Wszystkie zwierzęta'
+      path: '/ Wszystkie zwierzęta'
     }
   },
   {
@@ -32,7 +58,7 @@ export const appRoutes: Routes = [
     component: EdycjaZwierzeciaComponent,
     canActivate: [AuthGuard],
     data: {
-      path: 'Strona główna / Zarządzanie zwierzętami / Edycja'
+      path: '/ Edycja zwierzęcia'
     }
   },
   {
@@ -40,7 +66,7 @@ export const appRoutes: Routes = [
     component: ZwierzeComponent,
     canActivate: [AuthGuard],
     data: {
-      path: 'Strona główna / Zarządzanie zwierzętami / Szczegóły zwierzęcia'
+      path: '/ Szczegóły zwierzęcia'
     }
   },
   {
@@ -48,21 +74,21 @@ export const appRoutes: Routes = [
     component: DodawanieZwierzeciaComponent,
     canActivate: [AuthGuard],
     data: {
-      path: 'Strona główna / Zarządzanie zwierzętami / Dodaj zwierzę'
+      path: '/ Dodaj zwierzę'
     }
   },
   { path: 'zarzadzanie-zwierzetami',
     component: ZarzadzanieZwierzetamiComponent,
     canActivate: [AuthGuard],
     data: {
-      path: 'Strona główna / Zarządzanie zwierzętami'
+      path: ''
     }
   },
   { path: '',
     component: LogowanieComponent,
     canActivate: [AuthGuardLoginPage],
     data: {
-      path: 'Strona główna'
+      path: 'Logowanie do systemu'
     },
     pathMatch: 'full'
   },

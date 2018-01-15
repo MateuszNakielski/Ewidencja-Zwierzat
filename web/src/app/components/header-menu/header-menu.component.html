@@ -1,10 +1,19 @@
 <div class="tlo">
   <img [src]="'./assets/logo.png'" [routerLink]="'/zarzadzanie-zwierzetami'">
 </div>
+<!--
 <div class="menu-phone" (click)="pokazMenu = true" *ngIf="uzytkownikZalogowany">
   <div class="kladka"></div>
   <div class="kladka important"></div>
   <div class="kladka"></div>
 </div>
+-->
 
+
+<div class="wyloguj-sie" *ngIf="uzytkownikZalogowany" (click)="onWylogujClick()">
+ Wyloguj się
+</div>
+
+<!--
 <app-touch-menu *ngIf="pokazMenu" (clickOutside)="schowajMenu($event)" (click)="pokazMenu = false"></app-touch-menu>
+-->

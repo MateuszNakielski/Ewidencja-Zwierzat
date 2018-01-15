@@ -1,6 +1,6 @@
 <app-header-menu></app-header-menu>
-<app-header-info>{{ header }}</app-header-info>
+<app-header-info [headerWidth]="headerWidth">{{ header }}</app-header-info>
 <app-wczytywanie *ngIf="wczytywanie"></app-wczytywanie>
 <div class="content">
-  <ng-content></ng-content>
+  <ng-content *ngIf="!wczytywanie"></ng-content>
 </div>

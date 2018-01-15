@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class PrzyciskComponent implements OnInit {
   @Input() important = false;
   @Input() big = false;
+  @Input() type = '';
 
   constructor() { }
 

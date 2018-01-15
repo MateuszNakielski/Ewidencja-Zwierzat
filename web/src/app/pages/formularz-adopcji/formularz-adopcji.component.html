@@ -1,0 +1,88 @@
+<app-page [header]="title">
+  <div class="container">
+    <h2 class="form-naglowek">Zwierzę do adopcji</h2>
+    <hr>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <app-zdjecie [height]="'220px'"></app-zdjecie>
+      </div>
+    </div>
+
+    <h2 class="form-naglowek">Dane adoptującego</h2>
+    <hr>
+
+    <form>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label>Imię<span class="star">*</span></label>
+          <input type="text" class="form-control" placeholder="">
+        </div>
+        <div class="form-group col-sm-4">
+          <label>Nazwisko<span class="star">*</span></label>
+          <input type="text" class="form-control"  placeholder="">
+        </div>
+        <div class="form-group col-sm-4">
+          <label>Email<span class="star">*</span></label>
+          <input type="email" class="form-control" placeholder="email.adoptującego@poczta.pl">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label>Nazwa miejscowości<span class="star">*</span></label>
+          <input type="text" class="form-control" placeholder="Miejscowość">
+        </div>
+        <div class="form-group col-sm-3">
+          <label>Numer telefonu<span class="star">*</span></label>
+          <input type="text" class="form-control" placeholder="555-555-555">
+        </div>
+        <div class="form-group col-sm-3 col-xs-6">
+          <label>Numer dowodu<span class="star">*</span></label>
+          <input type="text" class="form-control"  placeholder="">
+        </div>
+        <div class="form-group col-sm-2 col-xs-6">
+          <label>Seria dowodu<span class="star">*</span></label>
+          <input type="text" class="form-control"  placeholder="">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <label>Ulica</label>
+          <input type="text" class="form-control" placeholder="Ulica">
+        </div>
+        <div class="form-group col-sm-3">
+          <label>Kod pocztowy<span class="star">*</span></label>
+          <input type="text" class="form-control" placeholder="00-000">
+        </div>
+        <div class="form-group col-xs-6 col-sm-2">
+          <label>Nr domu<span class="star">*</span></label>
+          <input type="text" class="form-control" placeholder="">
+        </div>
+        <div class="form-group col-xs-6 col-sm-2">
+          <label>Nr mieszkania<span class="star">*</span></label>
+          <input type="text" class="form-control" placeholder="">
+        </div>
+      </div>
+
+      <hr>
+      <span class="star">*</span> - pole wymagane.
+
+      <div class="row przycisk-top">
+        <div class="col-sm-3">
+          <app-przycisk [big]="true" [important]="true" [type]="'submit'">Dodaj adopcję zwierzęcia</app-przycisk>
+        </div>
+        <div class="col-sm-3">
+          <app-przycisk [big]="true" [important]="true" [type]="'submit'">Wydruk dokumentu pdf</app-przycisk>
+        </div>
+        <div class="col-sm-3">
+          <app-przycisk [big]="true" [routerLink]="'../../'">Usuń</app-przycisk>
+        </div>
+        <div class="col-sm-3">
+          <app-przycisk [big]="true" (click)="goBack()">Powrót</app-przycisk>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-page>

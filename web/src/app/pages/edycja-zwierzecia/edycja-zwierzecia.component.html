@@ -1,26 +1,43 @@
-<app-page [header]="zwierze.imie + ' | ID: ' + zwierze.id">
+<app-page [headerWidth]="'400px'" [header]="'Edycja zwierzęcia: ' + zwierze.imie + ' | ID: ' + zwierze.id">
   <div class="container">
     <app-komunikat [good]="true" *ngIf="edycjaTrue">Edycja zwierzęcia przebiegła pomyślnie.</app-komunikat>
     <app-komunikat [bad]="true" *ngIf="edycjaFalse">{{komunikatBad}}</app-komunikat>
     <div class="row">
-      <div class="col-sm-3">
-        <app-zdjecie [url]="url + zwierze.fotoUrl" [height]="'180px'"></app-zdjecie>
-        <app-file-input [maly]="true" (onChangeFile)="ustawZdjecie($event)"></app-file-input>
+      <span class="star">*</span> - pole wymagane.
+      <hr>
+      <div class="col-sm-5 col-md-4">
+        <app-zdjecie [url]="url + zwierze.fotoUrl" [height]="'240px'"></app-zdjecie>
+        <div>
+          <app-file-input  [maly]="true" (onChangeFile)="ustawZdjecie($event)"></app-file-input>
+        </div>
       </div>
-      <div class="col-sm-9">
+      <div class="col-sm-7 col-md-8">
         <div class="form-group row">
-          <p class="col-sm-2">Imię</p>
-          <div class="col-sm-10">
+          <p class="col-sm-3 col-md-2">Imię<span class="star">*</span></p>
+          <div class="col-sm-9 col-md-10">
             <input type="text" class="form-control" [(ngModel)]="imie">
           </div>
         </div>
         <div class="form-group row">
-          <p class="col-sm-2">Wiek</p>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="wiek">
+          <p class="col-sm-3 col-md-2">Wiek<span class="star">*</span></p>
+          <div class="col-sm-9 col-md-10">
+            <input type="number" class="form-control" [(ngModel)]="wiek">
           </div>
         </div>
-        <app-gatunek-rasa #gatunekRasa (onWyborGatunku)="wyborGatunku($event)" (onWyborRasy)="wyborRasy($event)" [wybranaRasa]="zwierze.rasa" [wybranyGatunek]="zwierze.gatunek" [mozliwyNull]="false" [label]="false" [labelClass]="'col-sm-2'" [inputClass]="'col-sm-10'"></app-gatunek-rasa>
+        <app-gatunek-rasa #gatunekRasa (onWyborGatunku)="wyborGatunku($event)" (onWyborRasy)="wyborRasy($event)" [wybranaRasa]="zwierze.rasa" [wybranyGatunek]="zwierze.gatunek" [mozliwyNull]="false" [label]="false" [labelClass]="'col-sm-3 col-md-2'" [inputClass]="'col-sm-9 col-md-10'"></app-gatunek-rasa>
+
+        <div class="form-group row">
+          <p class="col-sm-3 col-md-2">Numer CZIP<span class="star">*</span></p>
+          <div class="col-sm-9 col-md-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <p class="col-sm-3 col-md-2">Cechy szczególne</p>
+          <div class="col-sm-9 col-md-10">
+            <input type="text" class="form-control">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -34,21 +51,20 @@
         <app-text-input placeHolder="Podaj opis zwierzęcia..." (onTextInput)="zmienOpis($event)" [wartosc]="zwierze.opis"></app-text-input>
       </div>
     </div>
-
+  <hr [style.margin-bottom]="'2px'">
     <div class="row">
       <div class="col-sm-3 przycisk-top">
         <app-przycisk [big]="true" (click)="zapiszZmiany()" [important]="true">Zapisz zmiany</app-przycisk>
       </div>
       <div class="col-sm-3 przycisk-top">
-        <app-przycisk [big]="true" [routerLink]="'../../'">Anuluj</app-przycisk>
+        <app-przycisk [big]="true" [routerLink]="'../../dodawanie-adopcji/' + zwierze.id" [important]="true">Adoptuj</app-przycisk>
       </div>
       <div class="col-sm-3 przycisk-top">
-        <app-przycisk [big]="true">Usuń</app-przycisk>
+        <app-przycisk [big]="true" (click)="usunZwierze()">Usuń</app-przycisk>
       </div>
       <div class="col-sm-3 przycisk-top">
-        <app-przycisk [big]="true">Adoptuj</app-przycisk>
+        <app-przycisk [big]="true" (click)="goBack()">Powrót</app-przycisk>
       </div>
     </div>
-
   </div>
 </app-page>

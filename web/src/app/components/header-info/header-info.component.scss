@@ -1,4 +1,10 @@
 $wysokosc: 100px;
+$font-col: #2e2e2e;
+
+a {
+  cursor: pointer;
+  color: $font-col;
+}
 
 .tlo {
   background-color: #F7FAFB;
@@ -18,6 +24,11 @@ h1 {
   line-height: 2.5rem;
 }
 
+.blockhover {
+  cursor: default;
+  text-decoration: none;
+}
+
 p {
   display: block;
   text-align: center;
@@ -25,6 +36,8 @@ p {
   font-size: 1rem;
   max-height: $wysokosc;
   transition-duration: 0.3s;
+  color: $font-col;
+  cursor: default;
 }
 
 @media (min-width: 600px) {

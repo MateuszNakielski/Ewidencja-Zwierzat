@@ -22,6 +22,7 @@ export class GatunekRasaComponent implements OnInit {
   @Input() inputClass = 'col-sm-9';
   @Input() wybranyGatunek = '';
   @Input() wybranaRasa = '';
+  @Input() bezGwiazdki = false;
 
   constructor(private stateServ: StateService) { }
 

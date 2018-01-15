@@ -5,6 +5,7 @@ import {ZwierzeService} from '../../services/zwierze.service';
 import {ActivatedRoute} from '@angular/router';
 import {RestService} from '../../services/rest.service';
 import {EdytujZwierzeRequest} from '../../model/rest/zwierze/edytujZwierzeRequest';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-zwierze',
@@ -17,7 +18,7 @@ export class ZwierzeComponent implements OnInit {
 
   url = '';
 
-  constructor(private route: ActivatedRoute, private rest: RestService, private zwServ: ZwierzeService) {
+  constructor(private location: Location, private route: ActivatedRoute, private rest: RestService, private zwServ: ZwierzeService) {
     this.zwierze = new Zwierze();
   }
 
@@ -29,6 +30,10 @@ export class ZwierzeComponent implements OnInit {
         this.zwierze = res.zwierzeDTO;
       }, err => console.log(err));
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

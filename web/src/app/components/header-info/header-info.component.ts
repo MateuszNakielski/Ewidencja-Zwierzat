@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-header-info',
@@ -9,11 +9,16 @@ import {ActivatedRoute} from '@angular/router';
 export class HeaderInfoComponent implements OnInit {
 
   path: string;
+  @Input() headerWidth;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.path = this.route.snapshot.data['path'];
+  }
+
+  doZarzadzania() {
+    this.router.navigate(['/zarzadzanie-zwierzetami']);
   }
 
 }

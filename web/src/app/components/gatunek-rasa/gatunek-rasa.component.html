@@ -1,7 +1,7 @@
 <div class="form-group row">
-  <label *ngIf="label" [class]="labelClass">Gatunek</label>
+  <label *ngIf="label" [class]="labelClass">Gatunek<span class="star" *ngIf="!bezGwiazdki">*</span></label>
   <p *ngIf="!label" [class]="labelClass">
-    Gatunek
+    Gatunek<span class="star" *ngIf="!bezGwiazdki">*</span>
   </p>
   <div [class]="inputClass">
     <select class="form-control" (input)="onSelectGatunek($event)" [(ngModel)]="wybranyGatunek">
@@ -10,9 +10,9 @@
   </div>
 </div>
 <div class="form-group row">
-  <label *ngIf="label" [class]="labelClass">Rasa</label>
+  <label *ngIf="label" [class]="labelClass">Rasa<span class="star" *ngIf="!bezGwiazdki">*</span></label>
   <p *ngIf="!label" [class]="labelClass">
-    Rasa
+    Rasa<span class="star" *ngIf="!bezGwiazdki">*</span>
   </p>
   <div [class]="inputClass">
     <select class="form-control" [disabled]="wybranyGatunek === ''" [(ngModel)]="wybranaRasa" (input)="onSelectRasa($event)">
