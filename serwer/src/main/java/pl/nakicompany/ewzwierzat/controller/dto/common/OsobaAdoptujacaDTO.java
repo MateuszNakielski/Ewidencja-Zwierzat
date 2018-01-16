@@ -15,5 +15,4 @@ public class OsobaAdoptujacaDTO {
     private String kodPocztowy;
     private String nrDomu;
     private String nrMieszkania;
-
 }

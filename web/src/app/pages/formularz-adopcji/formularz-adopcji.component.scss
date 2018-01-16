@@ -3,3 +3,24 @@
 .form-naglowek {
   color: #D99E1A;
 }
+
+.warn {
+  box-shadow: 0 0 1px 1px rgba(255, 53, 77, 0.85) !important;
+  border: 1px solid rgba(255, 53, 77, 0.85) !important;
+}
+
+.dane {
+  background-color: #f5f5f5;
+  display: inline-block;
+  padding: 3px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tresc-opisu {
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  padding: 8px;
+  width: 100%;
+  min-height: 170px;
+}
