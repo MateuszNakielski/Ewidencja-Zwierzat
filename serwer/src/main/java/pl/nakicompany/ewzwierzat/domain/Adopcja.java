@@ -14,7 +14,7 @@ public class Adopcja {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(optional=false)
+    @OneToOne(optional=false, cascade = CascadeType.REMOVE)
     @JoinColumn(name="osoba_adoptujaca_id")
     private OsobaAdoptujaca osobaAdoptujaca;
 

@@ -26,7 +26,7 @@ public class AdopcjaRestController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> utworzZwierze(@RequestBody UtworzAdopcjeRequestDTO utworzAdopcjeRequestDTO){
+    public ResponseEntity<?> utworzAdopcje(@RequestBody UtworzAdopcjeRequestDTO utworzAdopcjeRequestDTO){
         UtworzAdopcjeResponseDTO utworzAdopcjeResponseDTO;
         try {
             utworzAdopcjeResponseDTO = adopcjaService.utworzAdopcje(utworzAdopcjeRequestDTO);

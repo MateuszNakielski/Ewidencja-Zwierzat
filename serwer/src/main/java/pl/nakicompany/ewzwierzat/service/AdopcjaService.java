@@ -101,10 +101,8 @@ public class AdopcjaService implements IAdopcjaService {
             throw new BrakRekorduException("Nie ma adopcji o ID" + id.toString());
 
         Adopcja adopcja = adopcjaRepository.getOne(id);
-        OsobaAdoptujaca osobaAdoptujaca = adopcja.getOsobaAdoptujaca();
         Zwierze zwierze = adopcja.getZwierze();
 
-        osobaAdoptujacaRepository.delete(osobaAdoptujaca);
         adopcjaRepository.delete(adopcja);
         zwierze.setAdoptowany(false);
         zwierzeRepository.save(zwierze);

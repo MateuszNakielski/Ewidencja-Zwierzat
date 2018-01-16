@@ -85,7 +85,7 @@ public class ZwierzeService implements IZwierzeService{
 
     @Override
     public List<ZwierzeDTO> pobierzZwierzeta(String gatunek, String rasa, String imie, Integer wiek) {
-        Stream<Zwierze> stream = zwierzeRepository.findAll().stream();
+        Stream<Zwierze> stream = zwierzeRepository.findAll().stream().filter(z -> !z.getAdoptowany());
         if(gatunek != null)
             stream = stream.filter(z -> z.getGatunek().equals(gatunek));
         if(rasa != null)
