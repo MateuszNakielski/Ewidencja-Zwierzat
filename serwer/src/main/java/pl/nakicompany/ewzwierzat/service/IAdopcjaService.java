@@ -6,4 +6,6 @@ import pl.nakicompany.ewzwierzat.utils.exception.BrakRekorduException;
 
 public interface IAdopcjaService {
     UtworzAdopcjeResponseDTO utworzAdopcje(UtworzAdopcjeRequestDTO utworzAdopcjeRequestDTO) throws BrakRekorduException;
+
+    void usunAdopcje(Long id) throws BrakRekorduException;
 }

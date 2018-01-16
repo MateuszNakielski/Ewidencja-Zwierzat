@@ -94,7 +94,7 @@ public class ZwierzeRestController {
     @RequestMapping(value = "/{id}",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> EdytujZwierze(
+    public ResponseEntity<?> edytujZwierze(
             @PathVariable("id") Long id,
             @RequestBody EdytujZwierzeRequestDTO edytujZwierzeRequestDTO){
         EdytujZwierzeResponseDTO edytujZwierzeResponseDTO;

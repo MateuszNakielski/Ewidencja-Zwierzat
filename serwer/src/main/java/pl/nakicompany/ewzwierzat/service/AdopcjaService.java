@@ -2,6 +2,7 @@ package pl.nakicompany.ewzwierzat.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.nakicompany.ewzwierzat.controller.dto.common.AdopcjaDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.OsobaAdoptujacaDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.ZwierzeDTO;
@@ -16,6 +17,7 @@ import pl.nakicompany.ewzwierzat.repository.ZwierzeRepository;
 import pl.nakicompany.ewzwierzat.utils.exception.BrakRekorduException;
 
 @Service
+@Transactional
 public class AdopcjaService implements IAdopcjaService {
 
     @Autowired
@@ -91,5 +93,20 @@ public class AdopcjaService implements IAdopcjaService {
         utworzAdopcjeResponseDTO.setAdopcjaDTO(adopcjaDTO);
 
         return utworzAdopcjeResponseDTO;
+    }
+
+    @Override
+    public void usunAdopcje(Long id) throws BrakRekorduException {
+        if(!adopcjaRepository.exists(id))
+            throw new BrakRekorduException("Nie ma adopcji o ID" + id.toString());
+
+        Adopcja adopcja = adopcjaRepository.getOne(id);
+        OsobaAdoptujaca osobaAdoptujaca = adopcja.getOsobaAdoptujaca();
+        Zwierze zwierze = adopcja.getZwierze();
+
+        osobaAdoptujacaRepository.delete(osobaAdoptujaca);
+        adopcjaRepository.delete(adopcja);
+        zwierze.setAdoptowany(false);
+        zwierzeRepository.save(zwierze);
     }
 }
