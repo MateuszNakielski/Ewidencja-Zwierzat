@@ -7,62 +7,111 @@
       <div class="col-xs-12 col-sm-4 col-md-3">
         <app-zdjecie [height]="'220px'"></app-zdjecie>
       </div>
+      <div class="col-xs-12 col-sm-5 col-md-4" [class.przycisk-top]="!zwierze.opis">
+        <div class="row">
+          <p class="col-xs-5 col-md-4">Imię:</p>
+          <div class="col-xs-7">
+            <b class="dane">{{zwierze.imie}}</b>
+          </div>
+        </div>
+
+        <div class="row">
+          <p class="col-xs-5 col-md-4">Wiek:</p>
+          <div class="col-xs-7">
+            <b class="dane">{{zwierze.wiek}}</b>
+          </div>
+        </div>
+
+        <div class="row">
+          <p class="col-xs-5 col-md-4">Gatunek:</p>
+          <div class="col-xs-7">
+            <b class="dane">{{zwierze.gatunek}}</b>
+          </div>
+        </div>
+
+        <div class="row">
+          <p class="col-xs-5 col-md-4">Rasa:</p>
+          <div class="col-xs-7">
+            <b class="dane">{{zwierze.rasa}}</b>
+          </div>
+        </div>
+
+        <div class="row">
+          <p class="col-xs-5 col-md-4">Numer CZIP:</p>
+          <div class="col-xs-7">
+            <b class="dane">{{zwierze.numerCZIP}}</b>
+          </div>
+        </div>
+
+        <div class="row">
+          <p class="col-xs-5 col-md-4">Numer rejestru:</p>
+          <div class="col-xs-7">
+            <b class="dane">{{zwierze.id}}</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-5 przycisk-top" *ngIf="zwierze.opis">
+        <p>Opis:</p>
+        <p class="tresc-opisu">{{zwierze.opis}}</p>
+      </div>
+
     </div>
 
     <h2 class="form-naglowek">Dane adoptującego</h2>
     <hr>
 
-    <form>
+    <form [formGroup]="form" (ngSubmit)="adoptuj()">
       <div class="row">
         <div class="form-group col-sm-4">
           <label>Imię<span class="star">*</span></label>
-          <input type="text" class="form-control" placeholder="">
+          <input type="text" class="form-control" formControlName="imie" [class.warn]="czyBladPola('imie')">
         </div>
         <div class="form-group col-sm-4">
           <label>Nazwisko<span class="star">*</span></label>
-          <input type="text" class="form-control"  placeholder="">
+          <input type="text" class="form-control" formControlName="nazwisko" [class.warn]="czyBladPola('nazwisko')">
         </div>
         <div class="form-group col-sm-4">
           <label>Email<span class="star">*</span></label>
-          <input type="email" class="form-control" placeholder="email.adoptującego@poczta.pl">
+          <input type="email" class="form-control" placeholder="email.adoptującego@poczta.pl" formControlName="email" [class.warn]="czyBladPola('email')">
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-sm-4">
           <label>Nazwa miejscowości<span class="star">*</span></label>
-          <input type="text" class="form-control" placeholder="Miejscowość">
+          <input type="text" class="form-control" placeholder="Miejscowość" formControlName="miejscowosc" [class.warn]="czyBladPola('miejscowosc')">
         </div>
         <div class="form-group col-sm-3">
           <label>Numer telefonu<span class="star">*</span></label>
-          <input type="text" class="form-control" placeholder="555-555-555">
+          <input type="text" class="form-control" placeholder="555-555-555" formControlName="telefon" [class.warn]="czyBladPola('telefon')">
         </div>
         <div class="form-group col-sm-3 col-xs-6">
           <label>Numer dowodu<span class="star">*</span></label>
-          <input type="text" class="form-control"  placeholder="">
+          <input type="text" class="form-control" formControlName="nrDowodu" [class.warn]="czyBladPola('nrDowodu')">
         </div>
         <div class="form-group col-sm-2 col-xs-6">
           <label>Seria dowodu<span class="star">*</span></label>
-          <input type="text" class="form-control"  placeholder="">
+          <input type="text" class="form-control" formControlName="seriaDowodu" [class.warn]="czyBladPola('seriaDowodu')">
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-sm-5">
           <label>Ulica</label>
-          <input type="text" class="form-control" placeholder="Ulica">
+          <input type="text" class="form-control" placeholder="Ulica" formControlName="ulica">
         </div>
         <div class="form-group col-sm-3">
           <label>Kod pocztowy<span class="star">*</span></label>
-          <input type="text" class="form-control" placeholder="00-000">
+          <input type="text" class="form-control" placeholder="00-000" formControlName="kodPocztowy" [class.warn]="czyBladPola('kodPocztowy')">
         </div>
         <div class="form-group col-xs-6 col-sm-2">
           <label>Nr domu<span class="star">*</span></label>
-          <input type="text" class="form-control" placeholder="">
+          <input type="text" class="form-control" formControlName="nrDomu" [class.warn]="czyBladPola('nrDomu')">
         </div>
         <div class="form-group col-xs-6 col-sm-2">
-          <label>Nr mieszkania<span class="star">*</span></label>
-          <input type="text" class="form-control" placeholder="">
+          <label>Nr mieszkania</label>
+          <input type="text" class="form-control" formControlName="nrMieszkania">
         </div>
       </div>
 
@@ -71,10 +120,10 @@
 
       <div class="row przycisk-top">
         <div class="col-sm-3">
-          <app-przycisk [big]="true" [important]="true" [type]="'submit'">Dodaj adopcję zwierzęcia</app-przycisk>
+          <app-przycisk [big]="true" [important]="true" [type]="'submit'">{{przyciskSubmit}}</app-przycisk>
         </div>
         <div class="col-sm-3">
-          <app-przycisk [big]="true" [important]="true" [type]="'submit'">Wydruk dokumentu pdf</app-przycisk>
+          <app-przycisk [big]="true" (click)="wyczysc()" [important]="true">Wydruk dokumentu pdf</app-przycisk>
         </div>
         <div class="col-sm-3">
           <app-przycisk [big]="true" [routerLink]="'../../'">Usuń</app-przycisk>

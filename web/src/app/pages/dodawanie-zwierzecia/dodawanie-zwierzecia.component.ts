@@ -22,6 +22,8 @@ export class DodawanieZwierzeciaComponent implements OnInit {
   gatunek: string;
   opis: string;
   plik: Plik;
+  nrCZIP: string;
+  cechy: string;
 
   dodanieTrue = false;
   dodanieFalse = false;
@@ -57,6 +59,8 @@ export class DodawanieZwierzeciaComponent implements OnInit {
     zw.zwierze.rasa = this.rasa;
     zw.zwierze.opis = this.opis;
     zw.zwierzeFoto = this.plik;
+    zw.zwierze.cechySzczegolne = this.cechy;
+    zw.zwierze.numerCZIP = this.nrCZIP;
     if (this.waliduj()) {
       this.zwierzeServ.dodajZwierze(zw).subscribe(r => {
         console.log(r);
@@ -70,7 +74,8 @@ export class DodawanieZwierzeciaComponent implements OnInit {
   }
 
   waliduj(): boolean {
-    if (!this.imie || !this.wiek || !this.gatunek || !this.rasa) {
+    console.log(this.nrCZIP)
+    if (!this.imie || !this.wiek || !this.gatunek || !this.rasa || !this.nrCZIP) {
       this.komunikatBad = 'Należy uzupełnić wszystkie wymagane pola formularza';
       return false;
     }
@@ -89,6 +94,8 @@ export class DodawanieZwierzeciaComponent implements OnInit {
     this.imie = '';
     this.wiek = null;
     this.plik = null;
+    this.cechy = null;
+    this.nrCZIP = null;
     this.stateServ.ustawStan('inputClear');
   }
 

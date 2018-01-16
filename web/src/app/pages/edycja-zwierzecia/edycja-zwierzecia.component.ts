@@ -25,7 +25,8 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
   gatunek: string;
   opis: string;
   plik: Plik;
-
+  cechy: string;
+  nrCZIP: string;
 
   edycjaTrue = false;
   edycjaFalse = false;
@@ -46,6 +47,8 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
         this.gatunek = this.zwierze.gatunek;
         this.rasa = this.zwierze.rasa;
         this.opis = this.zwierze.opis;
+        this.nrCZIP = this.zwierze.numerCZIP;
+        this.cechy = this.zwierze.cechySzczegolne;
       }, err => {
         console.log(err);
         this.router.navigate(['/zarzadzanie-zwierzetami']);
@@ -88,6 +91,8 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
     edyt.zwierze.wiek = this.wiek;
     edyt.zwierze.opis = this.opis;
     edyt.zwierzeFoto = this.plik;
+    edyt.zwierze.numerCZIP = this.nrCZIP;
+    edyt.zwierze.cechySzczegolne = this.cechy;
     if (this.waliduj()) {
       this.zwServ.edytujZwierze(edyt).subscribe(res => {
         this.pokazKomunikatGood();
@@ -105,7 +110,7 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
   }
 
   waliduj(): boolean {
-    if (!this.imie || !this.wiek || !this.gatunek || !this.rasa) {
+    if (!this.imie || !this.wiek || !this.gatunek || !this.rasa || !this.nrCZIP) {
       this.komunikatBad = 'Należy uzupełnić wszystkie wymagane pola formularza';
       return false;
     }
