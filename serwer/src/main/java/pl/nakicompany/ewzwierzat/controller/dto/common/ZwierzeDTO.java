@@ -11,4 +11,6 @@ public class ZwierzeDTO {
     private Integer wiek;
     private String fotoUrl;
     private String opis;
+    private String numerCZIP;
+    private String cechySzczegolne;
 }

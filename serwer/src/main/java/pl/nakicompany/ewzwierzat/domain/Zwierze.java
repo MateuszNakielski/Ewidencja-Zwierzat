@@ -30,4 +30,9 @@ public class Zwierze {
     @Column(name="opis")
     private String opis;
 
+    @Column(name="numer_czip")
+    private String numerCZIP;
+
+    @Column(name="cechy_szczegolne")
+    private String cechySzczegolne;
 }

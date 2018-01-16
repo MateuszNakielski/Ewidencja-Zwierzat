@@ -50,6 +50,8 @@ public class ZwierzeService implements IZwierzeService{
         zwierze.setImie(zwierzeDTO.getImie());
         zwierze.setOpis(zwierzeDTO.getOpis());
         zwierze.setWiek(zwierzeDTO.getWiek());
+        zwierze.setNumerCZIP(zwierzeDTO.getNumerCZIP());
+        zwierze.setCechySzczegolne(zwierzeDTO.getCechySzczegolne());
         zwierze.setImageUrl(fotoUrl);
         zwierze = zwierzeRepository.save(zwierze);
         zwierzeDTO.setId(zwierze.getId());
@@ -76,6 +78,8 @@ public class ZwierzeService implements IZwierzeService{
         zwierzeDTO.setOpis(zwierze.getOpis());
         zwierzeDTO.setRasa(zwierze.getRasa());
         zwierzeDTO.setWiek(zwierze.getWiek());
+        zwierzeDTO.setCechySzczegolne(zwierze.getCechySzczegolne());
+        zwierzeDTO.setNumerCZIP(zwierze.getNumerCZIP());
         return zwierzeDTO;
     }
 
@@ -100,6 +104,8 @@ public class ZwierzeService implements IZwierzeService{
             zwierzeDTO.setGatunek(z.getGatunek());
             zwierzeDTO.setImie(z.getImie());
             zwierzeDTO.setFotoUrl(z.getImageUrl());
+            zwierzeDTO.setCechySzczegolne(z.getCechySzczegolne());
+            zwierzeDTO.setNumerCZIP(z.getNumerCZIP());
             return zwierzeDTO;
         }).collect(Collectors.toList());
     }
@@ -155,6 +161,12 @@ public class ZwierzeService implements IZwierzeService{
             if(zwierzeDTO.getRasa() != null){
                 zwierze.setRasa(zwierzeDTO.getRasa());
             }
+            if(zwierzeDTO.getCechySzczegolne() != null){
+                zwierze.setCechySzczegolne(zwierzeDTO.getCechySzczegolne());
+            }
+            if(zwierzeDTO.getNumerCZIP() != null){
+                zwierze.setNumerCZIP(zwierzeDTO.getNumerCZIP());
+            }
         }
         result.setImie(zwierze.getImie());
         result.setGatunek(zwierze.getGatunek());
@@ -162,7 +174,8 @@ public class ZwierzeService implements IZwierzeService{
         result.setRasa(zwierze.getRasa());
         result.setWiek(zwierze.getWiek());
         result.setFotoUrl(zwierze.getImageUrl());
-
+        result.setCechySzczegolne(zwierze.getCechySzczegolne());
+        result.setNumerCZIP(zwierze.getNumerCZIP());
         zwierzeRepository.save(zwierze);
         EdytujZwierzeResponseDTO edytujZwierzeResponseDTO = new EdytujZwierzeResponseDTO();
         edytujZwierzeResponseDTO.setZwierzeDTO(result);
