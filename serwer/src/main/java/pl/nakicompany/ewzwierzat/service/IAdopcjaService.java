@@ -1,5 +1,7 @@
 package pl.nakicompany.ewzwierzat.service;
 
+import pl.nakicompany.ewzwierzat.controller.dto.edytujAdopcje.EdytujAdopcjeRequestDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.edytujAdopcje.EdytujAdopcjeResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcje.PobierzAdopcjeResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcjePoID.PobierzAdopcjePoIdResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.utworzAdopcje.UtworzAdopcjeRequestDTO;
@@ -14,4 +16,6 @@ public interface IAdopcjaService {
     PobierzAdopcjeResponseDTO pobierzAdopcje();
 
     PobierzAdopcjePoIdResponseDTO pobierzAdopcje(Long id) throws BrakRekorduException;
+
+    EdytujAdopcjeResponseDTO edytujAdopcje(Long id, EdytujAdopcjeRequestDTO edytujAdopcjeRequestDTO) throws BrakRekorduException;
 }

@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nakicompany.ewzwierzat.controller.dto.common.AdopcjaDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.OsobaAdoptujacaDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.ZwierzeDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.edytujAdopcje.EdytujAdopcjeRequestDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.edytujAdopcje.EdytujAdopcjeResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcje.PobierzAdopcjeResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcjePoID.PobierzAdopcjePoIdResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.utworzAdopcje.UtworzAdopcjeRequestDTO;
@@ -193,5 +195,71 @@ public class AdopcjaService implements IAdopcjaService {
         PobierzAdopcjePoIdResponseDTO pobierzAdopcjePoIdResponseDTO = new PobierzAdopcjePoIdResponseDTO();
         pobierzAdopcjePoIdResponseDTO.setAdopcjaDTO(adopcjaDTO);
         return pobierzAdopcjePoIdResponseDTO;
+    }
+
+    @Override
+    public EdytujAdopcjeResponseDTO edytujAdopcje(Long id, EdytujAdopcjeRequestDTO edytujAdopcjeRequestDTO) throws BrakRekorduException {
+        if(!adopcjaRepository.exists(id))
+            throw new BrakRekorduException("Nie ma adopcji o ID" + id);
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO() == null)
+            throw new BrakRekorduException("Brak obiektu osoby");
+        Adopcja adopcja = adopcjaRepository.getOne(id);
+        OsobaAdoptujaca osobaAdoptujaca = adopcja.getOsobaAdoptujaca();
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getImie() != null)
+            osobaAdoptujaca.setImie(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getImie());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNazwisko() != null)
+            osobaAdoptujaca.setNazwisko(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNazwisko());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNumerTelefonu() != null)
+            osobaAdoptujaca.setNumerTelefonu(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNumerTelefonu());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getEmail() != null)
+            osobaAdoptujaca.setEmail(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getEmail());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNumerDowodu() != null)
+            osobaAdoptujaca.setNumerDowodu(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNumerDowodu());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getSeriaDowodu() != null)
+            osobaAdoptujaca.setNumerDowodu(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNumerDowodu());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getMiejscowosc() != null)
+            osobaAdoptujaca.setMiejscowosc(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getMiejscowosc());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getUlica() != null)
+            osobaAdoptujaca.setUlica(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getUlica());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNrDomu() != null)
+            osobaAdoptujaca.setNrDomu(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNrDomu());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNrMieszkania() != null)
+            osobaAdoptujaca.setNrMieszkania(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getNrMieszkania());
+        if(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getKodPocztowy() != null)
+            osobaAdoptujaca.setKodPocztowy(edytujAdopcjeRequestDTO.getOsobaAdoptujacaDTO().getKodPocztowy());
+
+        osobaAdoptujacaRepository.save(osobaAdoptujaca);
+
+        OsobaAdoptujacaDTO osobaAdoptujacaDTO = new OsobaAdoptujacaDTO();
+        osobaAdoptujacaDTO.setImie(osobaAdoptujaca.getImie());
+        osobaAdoptujacaDTO.setNazwisko(osobaAdoptujaca.getNazwisko());
+        osobaAdoptujacaDTO.setUlica(osobaAdoptujaca.getUlica());
+        osobaAdoptujacaDTO.setNrMieszkania(osobaAdoptujaca.getNrMieszkania());
+        osobaAdoptujacaDTO.setNrDomu(osobaAdoptujaca.getNrDomu());
+        osobaAdoptujacaDTO.setMiejscowosc(osobaAdoptujaca.getMiejscowosc());
+        osobaAdoptujacaDTO.setKodPocztowy(osobaAdoptujaca.getKodPocztowy());
+        osobaAdoptujacaDTO.setNumerTelefonu(osobaAdoptujaca.getNumerTelefonu());
+        osobaAdoptujacaDTO.setEmail(osobaAdoptujaca.getEmail());
+        osobaAdoptujacaDTO.setSeriaDowodu(osobaAdoptujaca.getSeriaDowodu());
+        osobaAdoptujacaDTO.setNumerDowodu(osobaAdoptujaca.getNumerDowodu());
+
+        ZwierzeDTO zwierzeDTO = new ZwierzeDTO();
+        zwierzeDTO.setImie(adopcja.getZwierze().getImie());
+        zwierzeDTO.setGatunek(adopcja.getZwierze().getGatunek());
+        zwierzeDTO.setRasa(adopcja.getZwierze().getRasa());
+        zwierzeDTO.setNumerCZIP(adopcja.getZwierze().getNumerCZIP());
+        zwierzeDTO.setId(adopcja.getZwierze().getId());
+        zwierzeDTO.setCechySzczegolne(adopcja.getZwierze().getCechySzczegolne());
+        zwierzeDTO.setFotoUrl(adopcja.getZwierze().getImageUrl());
+        zwierzeDTO.setOpis(adopcja.getZwierze().getOpis());
+        zwierzeDTO.setWiek(adopcja.getZwierze().getWiek());
+
+        AdopcjaDTO adopcjaDTO = new AdopcjaDTO();
+        adopcjaDTO.setId(adopcja.getId());
+        adopcjaDTO.setZwierzeDTO(zwierzeDTO);
+        adopcjaDTO.setOsobaAdoptujacaDTO(osobaAdoptujacaDTO);
+        EdytujAdopcjeResponseDTO edytujAdopcjeResponseDTO = new EdytujAdopcjeResponseDTO();
+        edytujAdopcjeResponseDTO.setAdopcjaDTO(adopcjaDTO);
+        return edytujAdopcjeResponseDTO;
     }
 }
