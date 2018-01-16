@@ -6,7 +6,7 @@ export class OsobaAdoptujaca {
   public numerTelefonu: string;
   public numerDowodu: string;
   public seriaDowodu: string;
-  public Ulica: string;
+  public ulica: string;
   public kodPocztowy: string;
   public nrDomu: string;
   public nrMieszkania: string;

@@ -2,10 +2,8 @@ import {OsobaAdoptujaca} from './osobaAdoptujaca';
 import {Zwierze} from './zwierze';
 
 export class Adopcja {
-  id: number;
-  osobaAdoptujacaDTO: OsobaAdoptujaca;
-  zwierzeDTO: Zwierze;
-  constructor() {
-    this.id = 1;
-  }
+  public id: number;
+  public osobaAdoptujacaDTO: OsobaAdoptujaca;
+  public zwierzeDTO: Zwierze;
+  constructor() {}
 }

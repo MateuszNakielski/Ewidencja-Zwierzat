@@ -5,54 +5,54 @@
 
     <div class="row">
       <div class="col-xs-12 col-sm-4 col-md-3">
-        <app-zdjecie [height]="'220px'"></app-zdjecie>
+        <app-zdjecie [url]="fotoUrl" [height]="'220px'"></app-zdjecie>
       </div>
-      <div class="col-xs-12 col-sm-5 col-md-4" [class.przycisk-top]="!zwierze.opis">
+      <div class="col-xs-12 col-sm-5 col-md-4" [style.margin-top]="'14px'">
         <div class="row">
-          <p class="col-xs-5 col-md-4">Imię:</p>
+          <b class="col-xs-5 col-md-4">Imię:</b>
           <div class="col-xs-7">
-            <b class="dane">{{zwierze.imie}}</b>
+            <p class="dane">{{zwierze.imie}}</p>
           </div>
         </div>
 
         <div class="row">
-          <p class="col-xs-5 col-md-4">Wiek:</p>
+          <b class="col-xs-5 col-md-4">Wiek:</b>
           <div class="col-xs-7">
-            <b class="dane">{{zwierze.wiek}}</b>
+            <p class="dane">{{zwierze.wiek}}</p>
           </div>
         </div>
 
         <div class="row">
-          <p class="col-xs-5 col-md-4">Gatunek:</p>
+          <b class="col-xs-5 col-md-4">Gatunek:</b>
           <div class="col-xs-7">
-            <b class="dane">{{zwierze.gatunek}}</b>
+            <p class="dane">{{zwierze.gatunek}}</p>
           </div>
         </div>
 
         <div class="row">
-          <p class="col-xs-5 col-md-4">Rasa:</p>
+          <b class="col-xs-5 col-md-4">Rasa:</b>
           <div class="col-xs-7">
-            <b class="dane">{{zwierze.rasa}}</b>
+            <p class="dane">{{zwierze.rasa}}</p>
           </div>
         </div>
 
         <div class="row">
-          <p class="col-xs-5 col-md-4">Numer CZIP:</p>
+          <b class="col-xs-5 col-md-4">Numer CZIP:</b>
           <div class="col-xs-7">
-            <b class="dane">{{zwierze.numerCZIP}}</b>
+            <p class="dane">{{zwierze.numerCZIP}}</p>
           </div>
         </div>
 
         <div class="row">
-          <p class="col-xs-5 col-md-4">Numer rejestru:</p>
+          <b class="col-xs-5 col-md-4">Numer rejestru:</b>
           <div class="col-xs-7">
-            <b class="dane">{{zwierze.id}}</b>
+            <p class="dane">{{zwierze.id}}</p>
           </div>
         </div>
       </div>
 
       <div class="col-xs-12 col-sm-3 col-md-5 przycisk-top" *ngIf="zwierze.opis">
-        <p>Opis:</p>
+        <p><b>Opis:</b></p>
         <p class="tresc-opisu">{{zwierze.opis}}</p>
       </div>
 
@@ -118,17 +118,17 @@
       <hr>
       <span class="star">*</span> - pole wymagane.
 
-      <div class="row przycisk-top">
-        <div class="col-sm-3">
+      <div class="row">
+        <div class="col-sm-3 przycisk-top" [class.col-sm-offset-3]="dodawanie">
           <app-przycisk [big]="true" [important]="true" [type]="'submit'">{{przyciskSubmit}}</app-przycisk>
         </div>
-        <div class="col-sm-3">
-          <app-przycisk [big]="true" (click)="wyczysc()" [important]="true">Wydruk dokumentu pdf</app-przycisk>
+        <div *ngIf="edycja" class="col-sm-3 przycisk-top">
+          <app-przycisk [big]="true" (click)="wyczysc()" [important]="true">Wydruk pdf</app-przycisk>
         </div>
-        <div class="col-sm-3">
-          <app-przycisk [big]="true" [routerLink]="'../../'">Usuń</app-przycisk>
+        <div *ngIf="edycja" class="col-sm-3 przycisk-top">
+          <app-przycisk [big]="true" (click)="usunAdopcje()" [routerLink]="'../../'">Usuń</app-przycisk>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 przycisk-top">
           <app-przycisk [big]="true" (click)="goBack()">Powrót</app-przycisk>
         </div>
       </div>

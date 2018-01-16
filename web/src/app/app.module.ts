@@ -37,6 +37,7 @@ import { WczytywanieComponent } from './components/wczytywanie/wczytywanie.compo
 import { ZwierzeComponent } from './pages/zwierze/zwierze.component';
 import {ListaAdopcjiComponent} from './pages/lista-adopcji/lista-adopcji.component';
 import { FormularzAdopcjiComponent } from './pages/formularz-adopcji/formularz-adopcji.component';
+import {AdopcjaService} from './services/adopcja.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import { FormularzAdopcjiComponent } from './pages/formularz-adopcji/formularz-a
       appRoutes
     )
   ],
-  providers: [RestService, StateService, AuthService, AuthGuardLoginPage, AuthGuard, FileService, ZwierzeService],
+  providers: [RestService, StateService, AuthService, AdopcjaService, AuthGuardLoginPage, AuthGuard, FileService, ZwierzeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

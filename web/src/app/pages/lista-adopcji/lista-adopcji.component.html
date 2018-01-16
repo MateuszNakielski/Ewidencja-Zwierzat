@@ -14,67 +14,66 @@
           <div class="row">
 
             <div class="col-sm-3">
-          <!--    <app-zdjecie [url]="url + a.fotoUrl"></app-zdjecie>-->
+             <app-zdjecie [url]="url + a.zwierzeDTO.fotoUrl"></app-zdjecie>
             </div>
 
-            <div class="col-sm-5 margin-phone">
+            <div class="col-sm-6 margin-phone">
               <div class="tabela">
                 <div class="row wiersz">
-                  <div class="col-xs-7 naglowek">
+                  <div class="col-xs-6 col-sm-5 naglowek">
                     Numer dokumentu
                   </div>
-                  <div class="col-xs-5 wartosc">
-
+                  <div class="col-xs-6 col-sm-7 wartosc">
+                    {{a.id}}
                   </div>
                 </div>
 
                 <div class="row wiersz">
 
-                  <div class="col-xs-7 naglowek">
+                  <div class="col-xs-6 col-sm-5 naglowek">
                     Numer zwierzęcia
                   </div>
-                  <div class="col-xs-5 wartosc">
-
+                  <div class="col-xs-6 col-sm-7 wartosc">
+                    {{a.zwierzeDTO.id}}
                   </div>
                 </div>
 
                 <div class="row wiersz">
-                  <div class="col-xs-7 naglowek">
+                  <div class="col-xs-6 col-sm-5 naglowek">
                     Imię zwierzęcia
                   </div>
-                  <div class="col-xs-5 wartosc">
-
+                  <div class="col-xs-6 col-sm-7 wartosc">
+                    {{a.zwierzeDTO.imie}}
                   </div>
                 </div>
 
                 <div class="row wiersz">
-                  <div class="col-xs-7 naglowek">
+                  <div class="col-xs-6 col-sm-5 naglowek">
                     Adoptujący
                   </div>
-                  <div class="col-xs-5 wartosc">
-
+                  <div class="col-xs-6 col-sm-7 wartosc">
+                    {{a.osobaAdoptujacaDTO.imie}} {{a.osobaAdoptujacaDTO.nazwisko}}
                   </div>
                 </div>
 
                 <div class="row wiersz">
-                  <div class="col-xs-7 naglowek">
-                    Adres email
+                  <div class="col-xs-6 col-sm-5 naglowek">
+                    Numer telefonu
                   </div>
-                  <div class="col-xs-5 wartosc">
-
+                  <div class="col-xs-6 col-sm-7 wartosc">
+                    {{a.osobaAdoptujacaDTO.numerTelefonu}}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-4 margin-phone">
-              <app-przycisk [big]="true" [routerLink]="'../szczegoly-zwierzecia/' + a.id" class="przycisk">Wydrukuj</app-przycisk>
+            <div class="col-sm-3 margin-phone">
+              <app-przycisk [big]="true" class="przycisk">Wydrukuj</app-przycisk>
               <app-przycisk [big]="true" [routerLink]="'../edycja-adopcji/' + a.id" class="przycisk" [important]="true">Edytuj dane</app-przycisk>
-              <app-przycisk [big]="true" class="przycisk last">Usuń</app-przycisk>
+              <app-przycisk [big]="true" (click)="usunAdopcje(a.id)" class="przycisk last">Usuń</app-przycisk>
             </div>
           </div>
         </div>
       </div>
-
 
       <div class="row przycisk-top">
         <div class="col-md-10 col-md-offset-1">
