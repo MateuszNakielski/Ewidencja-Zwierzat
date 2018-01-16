@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nakicompany.ewzwierzat.controller.dto.common.AdopcjaDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.OsobaAdoptujacaDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.ZwierzeDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcje.PobierzAdopcjeResponseDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcjePoID.PobierzAdopcjePoIdResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.utworzAdopcje.UtworzAdopcjeRequestDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.utworzAdopcje.UtworzAdopcjeResponseDTO;
 import pl.nakicompany.ewzwierzat.domain.Adopcja;
@@ -15,6 +17,9 @@ import pl.nakicompany.ewzwierzat.repository.AdopcjaRepository;
 import pl.nakicompany.ewzwierzat.repository.OsobaAdoptujacaRepository;
 import pl.nakicompany.ewzwierzat.repository.ZwierzeRepository;
 import pl.nakicompany.ewzwierzat.utils.exception.BrakRekorduException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -106,5 +111,87 @@ public class AdopcjaService implements IAdopcjaService {
         adopcjaRepository.delete(adopcja);
         zwierze.setAdoptowany(false);
         zwierzeRepository.save(zwierze);
+    }
+
+    @Override
+    public PobierzAdopcjeResponseDTO pobierzAdopcje(){
+        List<AdopcjaDTO> result;
+        result = adopcjaRepository.findAll().stream().map(a -> {
+            AdopcjaDTO adopcjaDTO = new AdopcjaDTO();
+            OsobaAdoptujacaDTO osobaAdoptujacaDTO = new OsobaAdoptujacaDTO();
+            ZwierzeDTO zwierzeDTO = new ZwierzeDTO();
+
+            adopcjaDTO.setId(a.getId());
+            osobaAdoptujacaDTO.setImie(a.getOsobaAdoptujaca().getImie());
+            osobaAdoptujacaDTO.setNazwisko(a.getOsobaAdoptujaca().getNazwisko());
+            osobaAdoptujacaDTO.setEmail(a.getOsobaAdoptujaca().getEmail());
+            osobaAdoptujacaDTO.setMiejscowosc(a.getOsobaAdoptujaca().getMiejscowosc());
+            osobaAdoptujacaDTO.setNumerDowodu(a.getOsobaAdoptujaca().getNumerDowodu());
+            osobaAdoptujacaDTO.setSeriaDowodu(a.getOsobaAdoptujaca().getSeriaDowodu());
+            osobaAdoptujacaDTO.setNumerTelefonu(a.getOsobaAdoptujaca().getNumerTelefonu());
+            osobaAdoptujacaDTO.setUlica(a.getOsobaAdoptujaca().getUlica());
+            osobaAdoptujacaDTO.setKodPocztowy(a.getOsobaAdoptujaca().getKodPocztowy());
+            osobaAdoptujacaDTO.setNrDomu(a.getOsobaAdoptujaca().getNrDomu());
+            osobaAdoptujacaDTO.setNrMieszkania(a.getOsobaAdoptujaca().getNrMieszkania());
+            adopcjaDTO.setOsobaAdoptujacaDTO(osobaAdoptujacaDTO);
+
+            zwierzeDTO.setImie(a.getZwierze().getImie());
+            zwierzeDTO.setGatunek(a.getZwierze().getGatunek());
+            zwierzeDTO.setRasa(a.getZwierze().getRasa());
+            zwierzeDTO.setWiek(a.getZwierze().getWiek());
+            zwierzeDTO.setOpis(a.getZwierze().getOpis());
+            zwierzeDTO.setFotoUrl(a.getZwierze().getImageUrl());
+            zwierzeDTO.setCechySzczegolne(a.getZwierze().getCechySzczegolne());
+            zwierzeDTO.setId(a.getZwierze().getId());
+            zwierzeDTO.setNumerCZIP(a.getZwierze().getNumerCZIP());
+            adopcjaDTO.setZwierzeDTO(zwierzeDTO);
+            return adopcjaDTO;
+        }).collect(Collectors.toList());
+        PobierzAdopcjeResponseDTO pobierzAdopcjeResponseDTO = new PobierzAdopcjeResponseDTO();
+        pobierzAdopcjeResponseDTO.setListaAdopcji(result);
+        return pobierzAdopcjeResponseDTO;
+    }
+
+    @Override
+    public PobierzAdopcjePoIdResponseDTO pobierzAdopcje(Long id) throws BrakRekorduException {
+        if(!adopcjaRepository.exists(id))
+            throw new BrakRekorduException("Nie ma adopcji o ID" + id.toString());
+
+        Adopcja adopcja = adopcjaRepository.getOne(id);
+
+        AdopcjaDTO adopcjaDTO = new AdopcjaDTO();
+        OsobaAdoptujacaDTO osobaAdoptujacaDTO = new OsobaAdoptujacaDTO();
+        ZwierzeDTO zwierzeDTO = new ZwierzeDTO();
+
+        adopcjaDTO.setId(adopcja.getId());
+
+        osobaAdoptujacaDTO.setImie(adopcja.getOsobaAdoptujaca().getImie());
+        osobaAdoptujacaDTO.setNazwisko(adopcja.getOsobaAdoptujaca().getNazwisko());
+        osobaAdoptujacaDTO.setEmail(adopcja.getOsobaAdoptujaca().getEmail());
+        osobaAdoptujacaDTO.setNumerDowodu(adopcja.getOsobaAdoptujaca().getNumerDowodu());
+        osobaAdoptujacaDTO.setSeriaDowodu(adopcja.getOsobaAdoptujaca().getSeriaDowodu());
+        osobaAdoptujacaDTO.setNumerTelefonu(adopcja.getOsobaAdoptujaca().getNumerTelefonu());
+        osobaAdoptujacaDTO.setMiejscowosc(adopcja.getOsobaAdoptujaca().getMiejscowosc());
+        osobaAdoptujacaDTO.setKodPocztowy(adopcja.getOsobaAdoptujaca().getKodPocztowy());
+        osobaAdoptujacaDTO.setNrDomu(adopcja.getOsobaAdoptujaca().getNrDomu());
+        osobaAdoptujacaDTO.setNrMieszkania(adopcja.getOsobaAdoptujaca().getNrMieszkania());
+        osobaAdoptujacaDTO.setUlica(adopcja.getOsobaAdoptujaca().getUlica());
+
+        zwierzeDTO.setImie(adopcja.getZwierze().getImie());
+        zwierzeDTO.setGatunek(adopcja.getZwierze().getGatunek());
+        zwierzeDTO.setRasa(adopcja.getZwierze().getRasa());
+        zwierzeDTO.setNumerCZIP(adopcja.getZwierze().getNumerCZIP());
+        zwierzeDTO.setId(adopcja.getZwierze().getId());
+        zwierzeDTO.setCechySzczegolne(adopcja.getZwierze().getCechySzczegolne());
+        zwierzeDTO.setFotoUrl(adopcja.getZwierze().getImageUrl());
+        zwierzeDTO.setOpis(adopcja.getZwierze().getOpis());
+        zwierzeDTO.setWiek(adopcja.getZwierze().getWiek());
+
+        adopcjaDTO.setOsobaAdoptujacaDTO(osobaAdoptujacaDTO);
+        adopcjaDTO.setZwierzeDTO(zwierzeDTO);
+
+        PobierzAdopcjePoIdResponseDTO pobierzAdopcjePoIdResponseDTO = new PobierzAdopcjePoIdResponseDTO();
+        pobierzAdopcjePoIdResponseDTO.setAdopcjaDTO(adopcjaDTO);
+        return pobierzAdopcjePoIdResponseDTO;
     }
 }

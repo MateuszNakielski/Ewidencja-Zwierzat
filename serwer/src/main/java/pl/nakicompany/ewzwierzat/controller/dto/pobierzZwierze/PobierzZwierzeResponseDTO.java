@@ -1,4 +1,4 @@
-package pl.nakicompany.ewzwierzat.controller.dto;
+package pl.nakicompany.ewzwierzat.controller.dto.pobierzZwierze;
 
 import lombok.Data;
 import pl.nakicompany.ewzwierzat.controller.dto.common.ZwierzeDTO;

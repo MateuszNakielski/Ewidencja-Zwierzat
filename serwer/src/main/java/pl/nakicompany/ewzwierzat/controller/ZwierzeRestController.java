@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
-import pl.nakicompany.ewzwierzat.controller.dto.PobierzZwierzeResponseDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.pobierzZwierze.PobierzZwierzeResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.common.ZwierzeDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.edytujZwierze.EdytujZwierzeRequestDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.edytujZwierze.EdytujZwierzeResponseDTO;

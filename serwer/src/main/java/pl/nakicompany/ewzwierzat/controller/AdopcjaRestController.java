@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcje.PobierzAdopcjeResponseDTO;
+import pl.nakicompany.ewzwierzat.controller.dto.pobierzAdopcjePoID.PobierzAdopcjePoIdResponseDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.utworzAdopcje.UtworzAdopcjeRequestDTO;
 import pl.nakicompany.ewzwierzat.controller.dto.utworzAdopcje.UtworzAdopcjeResponseDTO;
 import pl.nakicompany.ewzwierzat.service.IAdopcjaService;
@@ -47,5 +49,28 @@ public class AdopcjaRestController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> pobierzAdopcje(@PathVariable("id") Long id){
+        PobierzAdopcjePoIdResponseDTO pobierzAdopcjePoIdResponseDTO;
+        try {
+            pobierzAdopcjePoIdResponseDTO = adopcjaService.pobierzAdopcje(id);
+        } catch (BrakRekorduException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<PobierzAdopcjePoIdResponseDTO>(pobierzAdopcjePoIdResponseDTO, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> pobierzAdopcje(){
+        PobierzAdopcjeResponseDTO pobierzAdopcjeResponseDTO = adopcjaService.pobierzAdopcje();
+        return new ResponseEntity<PobierzAdopcjeResponseDTO>(pobierzAdopcjeResponseDTO, HttpStatus.OK);
     }
 }
