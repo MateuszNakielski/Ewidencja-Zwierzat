@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class AdopcjaDTO {
     private Long id;
-    private AdopcjaDTO adopcjaDTO;
+    private OsobaAdoptujacaDTO osobaAdoptujacaDTO;
     private ZwierzeDTO zwierzeDTO;
 }

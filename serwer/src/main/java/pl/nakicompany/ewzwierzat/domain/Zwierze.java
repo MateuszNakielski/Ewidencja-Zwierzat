@@ -36,4 +36,7 @@ public class Zwierze {
 
     @Column(name="cechy_szczegolne")
     private String cechySzczegolne;
+
+    @Column(name="adoptowany")
+    private Boolean adoptowany = false;
 }
