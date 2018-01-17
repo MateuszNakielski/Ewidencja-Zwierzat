@@ -67,7 +67,7 @@
               </div>
             </div>
             <div class="col-sm-3 margin-phone">
-              <app-przycisk [big]="true" class="przycisk">Wydrukuj</app-przycisk>
+              <app-przycisk [big]="true" (click)="wydrukujAdopcje(a)"class="przycisk">Wydrukuj</app-przycisk>
               <app-przycisk [big]="true" [routerLink]="'../edycja-adopcji/' + a.id" class="przycisk" [important]="true">Edytuj dane</app-przycisk>
               <app-przycisk [big]="true" (click)="usunAdopcje(a.id)" class="przycisk last">Usuń</app-przycisk>
             </div>

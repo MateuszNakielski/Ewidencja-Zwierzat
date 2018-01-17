@@ -10,6 +10,7 @@ import {ZwierzeService} from '../../services/zwierze.service';
 import {OsobaAdoptujaca} from '../../model/osobaAdoptujaca';
 import {Adopcja} from '../../model/adopcja';
 import {EdytujAdopcjeRequestDTO} from '../../model/rest/adopcja/edytujAdopcjeRequest';
+import {PdfService} from '../../services/pdf.service';
 
 @Component({
   selector: 'app-formularz-adopcji',
@@ -29,7 +30,7 @@ export class FormularzAdopcjiComponent implements OnInit {
 
   constructor(private location: Location, private route: ActivatedRoute, private router: Router,
               private rest: RestService, private fb: FormBuilder, private adopcjaServ: AdopcjaService,
-              private zwierzeServ: ZwierzeService) {
+              private zwierzeServ: ZwierzeService, private pdfService: PdfService) {
     this.zwierze = new Zwierze();
     this.form = fb.group({
       imie: ['', Validators.required],
@@ -160,4 +161,11 @@ export class FormularzAdopcjiComponent implements OnInit {
         }, err => console.log('blad usuwania', err));
   }
 
+  pobierzPdf() {
+    this.adopcjaServ.podajAdopcjePoId(this.idObecnejAdopcji).subscribe(res => {
+      this.pdfService.pobierzPdfAdopcji(res.adopcjaDTO);
+    }, err => {
+      console.log('błąd drukowania (serwerowy)', err);
+    });
+  }
 }

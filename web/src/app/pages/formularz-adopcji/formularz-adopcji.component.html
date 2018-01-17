@@ -123,7 +123,7 @@
           <app-przycisk [big]="true" [important]="true" [type]="'submit'">{{przyciskSubmit}}</app-przycisk>
         </div>
         <div *ngIf="edycja" class="col-sm-3 przycisk-top">
-          <app-przycisk [big]="true" (click)="wyczysc()" [important]="true">Wydruk pdf</app-przycisk>
+          <app-przycisk [big]="true" (click)="pobierzPdf()" [important]="true">Wydruk pdf</app-przycisk>
         </div>
         <div *ngIf="edycja" class="col-sm-3 przycisk-top">
           <app-przycisk [big]="true" (click)="usunAdopcje()" [routerLink]="'../../'">Usuń</app-przycisk>

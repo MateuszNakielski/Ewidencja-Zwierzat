@@ -4,6 +4,7 @@ import {Adopcja} from '../../model/adopcja';
 import {Location} from '@angular/common';
 import {AdopcjaService} from '../../services/adopcja.service';
 import {PageComponent} from '../../components/page/page.component';
+import {PdfService} from '../../services/pdf.service';
 
 @Component({
   selector: 'app-lista-adopcji',
@@ -16,7 +17,7 @@ export class ListaAdopcjiComponent implements OnInit {
 
   url = '';
 
-  constructor(private location: Location, public rest: RestService, public adopcjaServ: AdopcjaService) {
+  constructor(private location: Location, public rest: RestService, public adopcjaServ: AdopcjaService, public pdfService: PdfService) {
     this.adopcje = [];
   }
 
@@ -39,5 +40,9 @@ export class ListaAdopcjiComponent implements OnInit {
         console.log('sukces', r);
         this.adopcje = this.adopcje.filter(ad => ad.id !== id);
         }, err => console.log('blad usuwania', err));
+  }
+
+  wydrukujAdopcje(adopcja: Adopcja) {
+    this.pdfService.pobierzPdfAdopcji(adopcja);
   }
 }
