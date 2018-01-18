@@ -1,14 +1,32 @@
 <div class="content">
   <div class="container">
+
+
+  <div class="odszukanie">
+    <p>
+      Zwierząt wyświetlonych na stronie: {{zwierzeta.length}}
+    </p>
+  </div>
+
   <div class="row">
+
     <div class="col-md-10 col-md-offset-1">
-      <app-komunikat *ngIf="zwierzeta.length == 0" [bad]="true">
+      <app-komunikat *ngIf="zwierzeta.length == 0" [brakDanych]="true">
         Brak zwierząt.
       </app-komunikat>
     </div>
+
+    <p-growl [life]="5000" [(value)]="sukcesMsgs"></p-growl>
+
   </div>
 
+
     <div class="row" *ngIf="zwierzeta.length != 0">
+
+
+      <hr *ngIf="zwierzeta.length != 0" class="hr-niski-top">
+
+
       <div class="col-md-10 col-md-offset-1 ramka margin-phone" *ngFor="let zw of zwierzeta">
         <div class="row">
 
@@ -68,9 +86,15 @@
           <div class="col-sm-4 margin-phone">
             <app-przycisk [big]="true" [routerLink]="'../szczegoly-zwierzecia/' + zw.id" class="przycisk">Wyświetl całość</app-przycisk>
             <app-przycisk [big]="true" [routerLink]="'../edycja/' + zw.id" class="przycisk" [important]="true">Edytuj dane</app-przycisk>
-            <app-przycisk [big]="true" [routerLink]="'../dodawanie-adopcji/' + zw.id" class="przycisk last">Adopcja</app-przycisk>
+            <app-przycisk [big]="true" [routerLink]="'../dodawanie-adopcji/' + zw.id" class="przycisk last">Adoptuj</app-przycisk>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <hr>
       </div>
     </div>
 

@@ -6,9 +6,9 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./komunikat.component.scss']
 })
 export class KomunikatComponent implements OnInit {
-  @Input() good = true;
+  @Input() good = false;
   @Input() bad = false;
-
+  @Input() brakDanych = false;
   constructor() { }
 
   ngOnInit() {

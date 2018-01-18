@@ -12,6 +12,34 @@ app-przycisk {
   outline: 0;
 }
 
+.hr-niski-top {
+  margin-top: -12px;
+  margin-bottom: 24px;
+}
+
+.ui-growl {
+  top: 250px;
+  right: 4%;
+}
+
+.inner-shadow-lekki {
+  -webkit-box-shadow: inset 0px 0px 63px -36px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset 0px 0px 63px -36px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 63px -36px rgba(0,0,0,0.5);
+}
+
+.odszukanie {
+  margin-top: -12px;
+  margin-bottom: 42px;
+  line-height: 12px;
+  height: 0;
+}
+
+.ui-growl-container, .ui-growl-item {
+  background-color: #D99E1A;
+  border-radius: 3px;
+}
+
 .star {
   color: red;
 }

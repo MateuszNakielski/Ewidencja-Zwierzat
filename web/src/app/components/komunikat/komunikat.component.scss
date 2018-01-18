@@ -1,15 +1,33 @@
 
-.komunikat-good {
+.komunikat {
   border-radius: 4px;
   padding: 12px;
   color: white;
-  background-color: #D99E1A;
   margin-bottom: 18px;
   box-shadow: 0 2px 3px rgba(44, 44, 44, 0.3);
 }
 
+.komunikat-good {
+  color: white;
+  background-color: #D99E1A;
+}
+
+span {
+  color: white;
+  margin-right: 6px;
+}
 
 .komunikat-bad {
   color: #ffdfe3;
   background-color: #c73f4b;
+}
+
+.brak-danych {
+  border-radius: inherit;
+  padding: 0px;
+  color: #232323;
+  margin-bottom: 0px;
+  box-shadow: none;
+  text-align: center;
+  font-size: 18px;
 }

@@ -7,6 +7,8 @@ import {EdytujZwierzeResponse} from '../../model/rest/zwierze/edytujZwierzeRespo
 import {EdytujZwierzeRequest} from '../../model/rest/zwierze/edytujZwierzeRequest';
 import {Plik} from '../../model/plik';
 import {Location} from '@angular/common';
+import {ConfirmationService} from 'primeng/primeng';
+import {AppMessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-edycja-zwierzecia',
@@ -32,7 +34,8 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
   edycjaFalse = false;
   komunikatBad = 'Błąd danych formularza';
 
-  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private rest: RestService, private zwServ: ZwierzeService) {
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private msgServ: AppMessageService,
+              private rest: RestService, private zwServ: ZwierzeService, private confirmServ: ConfirmationService) {
     this.zwierze = new Zwierze();
   }
 
@@ -71,13 +74,33 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
   wyborRasy(r) {
     this.rasa = r;
   }
-
+/*
   usunZwierze() {
     this.zwServ.usunZwierze(this.zwierze.id).subscribe(res => {
       this.router.navigate(['zarzadzanie-zwierzetami/wszystkie-zwierzeta']);
     }, err => {
       this.komunikatBad = 'Błąd serwera.';
       this.edycjaFalse = true;
+    });
+  }*/
+
+  usunZwierze() {
+    this.confirmServ.confirm({
+      message: 'Czy na pewno chcesz usunąć zwierzę?',
+      header: 'Potwierdzenie usunięcia',
+      icon: 'fa fa-trash',
+      accept: () => {
+        this.zwServ.usunZwierze(this.zwierze.id)
+          .subscribe(r => {
+            this.msgServ.dodajSukces({severity:'success', summary:'Usunięcie pomyślne', detail:'Usunięto zwierzę pomyślnie.'});
+            this.router.navigate(['/zarzadzanie-zwierzetami/wszystkie-zwierzeta']);
+          }, err => {
+            this.komunikatBad = 'Błąd serwera.';
+            this.edycjaFalse = true;
+            this.edycjaTrue = false;
+          });
+      },
+      reject: () => {}
     });
   }
 
@@ -111,7 +134,7 @@ export class EdycjaZwierzeciaComponent implements OnInit, AfterViewChecked {
 
   waliduj(): boolean {
     if (!this.imie || !this.wiek || !this.gatunek || !this.rasa || !this.nrCZIP) {
-      this.komunikatBad = 'Należy uzupełnić wszystkie wymagane pola formularza';
+      this.komunikatBad = 'Należy uzupełnić wszystkie wymagane pola formularza.';
       return false;
     }
     if (isNaN(this.wiek)) {

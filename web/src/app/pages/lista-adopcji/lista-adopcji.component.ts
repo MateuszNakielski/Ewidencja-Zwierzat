@@ -5,6 +5,8 @@ import {Location} from '@angular/common';
 import {AdopcjaService} from '../../services/adopcja.service';
 import {PageComponent} from '../../components/page/page.component';
 import {PdfService} from '../../services/pdf.service';
+import {AppMessageService} from '../../services/message.service';
+import {ConfirmationService, ConfirmDialog, Message} from 'primeng/primeng';
 
 @Component({
   selector: 'app-lista-adopcji',
@@ -16,12 +18,15 @@ export class ListaAdopcjiComponent implements OnInit {
   adopcje: Adopcja[];
 
   url = '';
+  msgs: Message[] = [];
 
-  constructor(private location: Location, public rest: RestService, public adopcjaServ: AdopcjaService, public pdfService: PdfService) {
+  constructor(private location: Location, private confirmServ: ConfirmationService, public rest: RestService,
+              public adopcjaServ: AdopcjaService, public pdfService: PdfService, public msgServ: AppMessageService) {
     this.adopcje = [];
   }
 
   ngOnInit() {
+    this.msgs = this.msgServ.podajSukcesy();
     this.url = this.rest.url;
     this.page.wczytywanie = true;
     this.adopcjaServ.podajAdopcje().subscribe(r => {
@@ -35,11 +40,23 @@ export class ListaAdopcjiComponent implements OnInit {
   }
 
   usunAdopcje(id: number) {
-    this.adopcjaServ.usunAdopcje(id)
-      .subscribe(r => {
-        console.log('sukces', r);
-        this.adopcje = this.adopcje.filter(ad => ad.id !== id);
-        }, err => console.log('blad usuwania', err));
+    this.confirmServ.confirm({
+      message: 'Czy na pewno chcesz usunąć adopcję?',
+      header: 'Potwierdzenie usunięcia',
+      icon: 'fa fa-trash',
+      accept: () => {
+        this.adopcjaServ.usunAdopcje(id)
+          .subscribe(r => {
+            this.adopcje = this.adopcje.filter(ad => ad.id !== id);
+          }, err => {
+            this.msgs = [{severity:'error', summary:'Błąd', detail:'Błąd serwera'}];
+          });
+        this.msgs = [{severity:'success', summary:'Usunięcie pomyślne', detail:'Usunięto adopcję pomyślne'}];
+      },
+      reject: () => {
+      }
+    });
+
   }
 
   wydrukujAdopcje(adopcja: Adopcja) {

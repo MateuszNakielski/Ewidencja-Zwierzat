@@ -1,62 +1,17 @@
 <app-page [header]="title">
+
+  <p-growl [value]="msgs"></p-growl>
+  <app-potwierdzenie></app-potwierdzenie>
+
   <div class="container">
+
     <h2 class="form-naglowek">Zwierzę do adopcji</h2>
     <hr>
 
-    <div class="row">
-      <div class="col-xs-12 col-sm-4 col-md-3">
-        <app-zdjecie [url]="fotoUrl" [height]="'220px'"></app-zdjecie>
-      </div>
-      <div class="col-xs-12 col-sm-5 col-md-4" [style.margin-top]="'14px'">
-        <div class="row">
-          <b class="col-xs-5 col-md-4">Imię:</b>
-          <div class="col-xs-7">
-            <p class="dane">{{zwierze.imie}}</p>
-          </div>
-        </div>
+    <app-zwierze-info-panel [zwierze]="zwierze"></app-zwierze-info-panel>
 
-        <div class="row">
-          <b class="col-xs-5 col-md-4">Wiek:</b>
-          <div class="col-xs-7">
-            <p class="dane">{{zwierze.wiek}}</p>
-          </div>
-        </div>
-
-        <div class="row">
-          <b class="col-xs-5 col-md-4">Gatunek:</b>
-          <div class="col-xs-7">
-            <p class="dane">{{zwierze.gatunek}}</p>
-          </div>
-        </div>
-
-        <div class="row">
-          <b class="col-xs-5 col-md-4">Rasa:</b>
-          <div class="col-xs-7">
-            <p class="dane">{{zwierze.rasa}}</p>
-          </div>
-        </div>
-
-        <div class="row">
-          <b class="col-xs-5 col-md-4">Numer CZIP:</b>
-          <div class="col-xs-7">
-            <p class="dane">{{zwierze.numerCZIP}}</p>
-          </div>
-        </div>
-
-        <div class="row">
-          <b class="col-xs-5 col-md-4">Numer rejestru:</b>
-          <div class="col-xs-7">
-            <p class="dane">{{zwierze.id}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-3 col-md-5 przycisk-top" *ngIf="zwierze.opis">
-        <p><b>Opis:</b></p>
-        <p class="tresc-opisu">{{zwierze.opis}}</p>
-      </div>
-
-    </div>
+    <app-komunikat [good]="true" *ngIf="edycjaTrue">Edycja adopcji przebiegła pomyślnie.</app-komunikat>
+    <app-komunikat [bad]="true" *ngIf="edycjaFalse">{{komunikatBad}}</app-komunikat>
 
     <h2 class="form-naglowek">Dane adoptującego</h2>
     <hr>
@@ -119,14 +74,17 @@
       <span class="star">*</span> - pole wymagane.
 
       <div class="row">
-        <div class="col-sm-3 przycisk-top" [class.col-sm-offset-3]="dodawanie">
+        <div class="col-sm-3 przycisk-top" [class.col-sm-offset-2]="dodawanie">
           <app-przycisk [big]="true" [important]="true" [type]="'submit'">{{przyciskSubmit}}</app-przycisk>
+        </div>
+        <div *ngIf="dodawanie" class="col-sm-3 przycisk-top">
+          <app-przycisk [big]="true" (click)="wyczysc()" [type]="'reset'">Wyczyść pola</app-przycisk>
         </div>
         <div *ngIf="edycja" class="col-sm-3 przycisk-top">
           <app-przycisk [big]="true" (click)="pobierzPdf()" [important]="true">Wydruk pdf</app-przycisk>
         </div>
         <div *ngIf="edycja" class="col-sm-3 przycisk-top">
-          <app-przycisk [big]="true" (click)="usunAdopcje()" [routerLink]="'../../'">Usuń</app-przycisk>
+          <app-przycisk [big]="true" (click)="usunAdopcje()">Usuń</app-przycisk>
         </div>
         <div class="col-sm-3 przycisk-top">
           <app-przycisk [big]="true" (click)="goBack()">Powrót</app-przycisk>

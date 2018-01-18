@@ -1,15 +1,28 @@
 <app-page [header]="'Lista adopcji'">
   <div class="content">
     <div class="container">
+
+      <div class="odszukanie">
+        <p>
+          Adopcji wyświetlonych na stronie: {{adopcje.length}}
+        </p>
+      </div>
+
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <app-komunikat *ngIf="adopcje.length == 0" [bad]="true">
+          <app-komunikat *ngIf="adopcje.length == 0" [brakDanych]="true">
             Brak adopcji.
           </app-komunikat>
         </div>
       </div>
 
+      <p-growl [value]="msgs"></p-growl>
+      <app-potwierdzenie></app-potwierdzenie>
+
       <div class="row" *ngIf="adopcje.length != 0">
+
+        <hr class="hr-niski-top">
+
         <div class="col-md-10 col-md-offset-1 ramka margin-phone" *ngFor="let a of adopcje">
           <div class="row">
 
@@ -75,9 +88,15 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <hr>
+        </div>
+      </div>
+
       <div class="row przycisk-top">
         <div class="col-md-10 col-md-offset-1">
-          <app-przycisk [big]="true" [important]="true" (click)="goBack()">Powrót</app-przycisk>
+          <app-przycisk [big]="true" [important]="true" [routerLink]="'../'">Powrót</app-przycisk>
         </div>
       </div>
 

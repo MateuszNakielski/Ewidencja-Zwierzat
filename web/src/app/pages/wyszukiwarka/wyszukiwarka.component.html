@@ -1,3 +1,4 @@
+<p-growl [(value)]="msgs"></p-growl>
 <app-page [header]="'Wyszukiwarka'">
   <app-lista-zwierzat *ngIf="odszukano" [zwierzeta]="odszukaneZwierzeta"></app-lista-zwierzat>
   <div class="container" *ngIf="!odszukano">
@@ -5,34 +6,39 @@
       Aby wyszukać zwierzę należy uzupełnić minimum jedno pole w powyższym formularzu.
     </p>
     <hr [style.margin-bottom]="'32px'">
+
+    <form [formGroup]="form">
+
     <div class="row">
-      <form class="col-md-8 col-md-offset-2" [formGroup]="form">
-        <div class="form-group row">
-          <label for="imie" class="col-sm-3 col-form-label">Imię</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="imie" formControlName="imie">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="form-group row">
+            <label for="imie" class="col-sm-3 col-form-label">Imię</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="imie" formControlName="imie">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="wiek" class="col-sm-3 col-form-label">Wiek</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="wiek" formControlName="wiek">
+          <div class="form-group row">
+            <label for="wiek" class="col-sm-3 col-form-label">Wiek</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="wiek" formControlName="wiek">
+            </div>
           </div>
+          <app-gatunek-rasa [bezGwiazdki]="true" (onWyborRasy)="wyborRasy($event)" (onWyborGatunku)="wyborGatunku($event)"></app-gatunek-rasa>
         </div>
-        <app-gatunek-rasa [bezGwiazdki]="true" (onWyborRasy)="wyborRasy($event)" (onWyborGatunku)="wyborGatunku($event)"></app-gatunek-rasa>
-      </form>
     </div>
+
     <hr>
-    <div class="row">
-      <div class="col-md-4 przycisk-top">
-        <app-przycisk [big]="true" [important]="true" (click)="wyszukaj()">Wyszukaj</app-przycisk>
+      <div class="row">
+        <div class="col-md-4 przycisk-top">
+          <app-przycisk [type]="submit" [big]="true" [important]="true" (click)="wyszukaj()">Wyszukaj</app-przycisk>
+        </div>
+        <div class="col-md-4 przycisk-top">
+          <app-przycisk [big]="true"  (click)="wyczysc()">Wyczyść pola</app-przycisk>
+        </div>
+        <div class="col-md-4 przycisk-top">
+          <app-przycisk [big]="true"  (click)="goBack()">Powrót</app-przycisk>
+        </div>
       </div>
-      <div class="col-md-4 przycisk-top">
-        <app-przycisk [big]="true"  (click)="wyczysc()">Wyczyść pola</app-przycisk>
-      </div>
-      <div class="col-md-4 przycisk-top">
-        <app-przycisk [big]="true"  (click)="goBack()">Powrót</app-przycisk>
-      </div>
-    </div>
+  </form>
   </div>
 </app-page>

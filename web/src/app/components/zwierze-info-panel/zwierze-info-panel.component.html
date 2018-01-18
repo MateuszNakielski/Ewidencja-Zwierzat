@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <app-zdjecie [url]="url + zwierze.fotoUrl" [height]="'220px'"></app-zdjecie>
+    </div>
+    <div class="col-xs-12 col-sm-5 col-md-4" [style.margin-top]="'14px'">
+      <div class="row">
+        <b class="col-xs-5 col-md-4">Imię:</b>
+        <div class="col-xs-7">
+          <p class="dane">{{zwierze.imie}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <b class="col-xs-5 col-md-4">Wiek:</b>
+        <div class="col-xs-7">
+          <p class="dane">{{zwierze.wiek}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <b class="col-xs-5 col-md-4">Gatunek:</b>
+        <div class="col-xs-7">
+          <p class="dane">{{zwierze.gatunek}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <b class="col-xs-5 col-md-4">Rasa:</b>
+        <div class="col-xs-7">
+          <p class="dane">{{zwierze.rasa}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <b class="col-xs-5 col-md-4">Numer CZIP:</b>
+        <div class="col-xs-7">
+          <p class="dane">{{zwierze.numerCZIP}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <b class="col-xs-5 col-md-4">Numer rejestru:</b>
+        <div class="col-xs-7">
+          <p class="dane">{{zwierze.id}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-5 przycisk-top" >
+      <div>
+        <p><b>Cechy szcególne:</b></p>
+        <p class="tresc-opisu cechy">{{zwierze.cechySzczegolne}}</p>
+      </div>
+      <div>
+        <p><b>Opis:</b></p>
+        <p class="tresc-opisu opis">{{zwierze.opis}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {StateService} from '../../services/state.service';
-import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-gatunek-rasa',

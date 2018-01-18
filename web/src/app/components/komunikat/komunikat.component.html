@@ -1,3 +1,4 @@
-<div [class.komunikat-good]="good" [class.komunikat-bad]="bad">
-  <ng-content></ng-content>
+<hr *ngIf="brakDanych">
+<div class="komunikat" [class.komunikat-good]="good" [class.komunikat-bad]="bad" [class.brak-danych]="brakDanych">
+ <span class="fa" [class.fa-check]="good" [class.fa-warning]="bad"></span> <ng-content></ng-content>
 </div>

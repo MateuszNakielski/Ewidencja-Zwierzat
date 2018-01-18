@@ -16,14 +16,12 @@ export class ZwierzeComponent implements OnInit {
 
   zwierze: Zwierze;
 
-  url = '';
-
-  constructor(private location: Location, private route: ActivatedRoute, private rest: RestService, private zwServ: ZwierzeService) {
+  constructor(private location: Location, private route: ActivatedRoute, private zwServ: ZwierzeService) {
     this.zwierze = new Zwierze();
   }
 
   ngOnInit() {
-    this.url = this.rest.url;
+
     this.route.params.subscribe(params => {
       this.zwServ.podajZwierze(params['id']).subscribe(res => {
         console.log(res);

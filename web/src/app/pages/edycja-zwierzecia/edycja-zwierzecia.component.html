@@ -1,7 +1,8 @@
-<app-page [headerWidth]="'400px'" [header]="'Edycja zwierzęcia: ' + zwierze.imie + ' | ID: ' + zwierze.id">
+<app-potwierdzenie></app-potwierdzenie><app-page [headerWidth]="'400px'" [header]="'Edycja zwierzęcia: ' + zwierze.imie + ' | ID: ' + zwierze.id">
   <div class="container">
     <app-komunikat [good]="true" *ngIf="edycjaTrue">Edycja zwierzęcia przebiegła pomyślnie.</app-komunikat>
     <app-komunikat [bad]="true" *ngIf="edycjaFalse">{{komunikatBad}}</app-komunikat>
+
     <div class="row">
       <span class="star">*</span> - pole wymagane.
       <hr>

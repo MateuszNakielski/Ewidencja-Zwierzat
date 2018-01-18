@@ -11,6 +11,8 @@ import {OsobaAdoptujaca} from '../../model/osobaAdoptujaca';
 import {Adopcja} from '../../model/adopcja';
 import {EdytujAdopcjeRequestDTO} from '../../model/rest/adopcja/edytujAdopcjeRequest';
 import {PdfService} from '../../services/pdf.service';
+import {AppMessageService} from '../../services/message.service';
+import {ConfirmationService, Message} from 'primeng/primeng';
 
 @Component({
   selector: 'app-formularz-adopcji',
@@ -26,11 +28,17 @@ export class FormularzAdopcjiComponent implements OnInit {
   idObecnejAdopcji: number;
   zwierze: Zwierze;
 
+  msgs: Message[];
+
   form: FormGroup;
 
-  constructor(private location: Location, private route: ActivatedRoute, private router: Router,
+  edycjaTrue = false;
+  edycjaFalse = false;
+  komunikatBad = 'Błąd danych formularza.';
+
+  constructor(private location: Location, private route: ActivatedRoute, private router: Router, private confirmServ: ConfirmationService,
               private rest: RestService, private fb: FormBuilder, private adopcjaServ: AdopcjaService,
-              private zwierzeServ: ZwierzeService, private pdfService: PdfService) {
+              private zwierzeServ: ZwierzeService, private pdfService: PdfService, private msgServ: AppMessageService) {
     this.zwierze = new Zwierze();
     this.form = fb.group({
       imie: ['', Validators.required],
@@ -106,14 +114,23 @@ export class FormularzAdopcjiComponent implements OnInit {
         const req = new UtworzAdopcjeRequestDTO();
         req.zwierzeDTO = this.zwierze;
         req.osobaAdoptujacaDTO = osobaAdoptujaca;
-        this.adopcjaServ.dodajAdopcje(req).subscribe(res => console.log('sukces dodawania', res),
+        this.adopcjaServ.dodajAdopcje(req).subscribe(res => {
+          this.msgServ.dodajSukces(this.msgServ.adopcjaDodanieSukces);
+          this.router.navigate(['/zarzadzanie-zwierzetami/wszystkie-zwierzeta']);
+          },
             err => console.log('blad dodawania adopcji', err));
       } else if (this.edycja) {
         const req = new EdytujAdopcjeRequestDTO();
         req.osobaAdoptujacaDTO = osobaAdoptujaca;
         this.adopcjaServ.edytujAdopcje(this.idObecnejAdopcji, req).subscribe(res => {
+          this.edycjaFalse = false;
+          this.edycjaTrue = true;
           console.log('sukces edycji', res);
-        }, err => console.log('blad edycji adopcji', err));
+        }, err => {
+          this.edycjaFalse = true;
+          this.edycjaTrue = false;
+          this.komunikatBad = 'Błąd serwera.';
+        });
       }
     }
   }
@@ -131,6 +148,10 @@ export class FormularzAdopcjiComponent implements OnInit {
     this.form.get('nrDowodu').markAsDirty();
     this.form.get('seriaDowodu').markAsDirty();
     this.form.get('nrDomu').markAsDirty();
+
+    this.edycjaFalse = true;
+    this.edycjaTrue = false;
+    this.komunikatBad = 'Błąd danych formularza.';
 
     return false;
   }
@@ -154,11 +175,23 @@ export class FormularzAdopcjiComponent implements OnInit {
   }
 
   usunAdopcje() {
-    this.adopcjaServ.usunAdopcje(this.idObecnejAdopcji)
-      .subscribe(r => {
-        console.log('sukces', r);
-        this.router.navigate(['/zarzadzanie-zwierzetami/lista-adopcji']);
-        }, err => console.log('blad usuwania', err));
+    this.confirmServ.confirm({
+      message: 'Czy na pewno chcesz usunąć adopcję?',
+      header: 'Potwierdzenie usunięcia',
+      icon: 'fa fa-trash',
+      accept: () => {
+        this.adopcjaServ.usunAdopcje(this.idObecnejAdopcji)
+          .subscribe(r => {
+            this.router.navigate(['/zarzadzanie-zwierzetami/lista-adopcji']);
+            this.msgServ.dodajSukces({severity:'success', summary:'Usunięcie pomyślne', detail:'Usunięto adopcję pomyślnie.'});
+          }, err => {
+            this.edycjaFalse = true;
+            this.edycjaTrue = false;
+            this.komunikatBad = 'Błąd serwera.';
+          });
+      },
+      reject: () => {}
+    });
   }
 
   pobierzPdf() {

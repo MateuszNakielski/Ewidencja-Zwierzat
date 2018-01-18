@@ -6,7 +6,7 @@ input {
   width: 100%;
   text-align: center;
   min-height: 60px;
-  color: #989898;
+
   margin-top: 12px;
   margin-bottom: 12px;
   padding-top: 6px;
@@ -14,6 +14,10 @@ input {
   border: 2px dashed #989898;
   border-radius: 10px;
   cursor: pointer;
+}
+
+span {
+  color: #989898;
 }
 
 .maly {

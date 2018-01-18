@@ -40,6 +40,15 @@ import { FormularzAdopcjiComponent } from './pages/formularz-adopcji/formularz-a
 import {AdopcjaService} from './services/adopcja.service';
 import {PdfService} from './services/pdf.service';
 
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {GrowlModule} from 'primeng/growl';
+import {AppMessageService} from './services/message.service';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import { PotwierdzenieComponent } from './components/potwierdzenie/potwierdzenie.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ZwierzeInfoPanelComponent } from './components/zwierze-info-panel/zwierze-info-panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,20 +73,27 @@ import {PdfService} from './services/pdf.service';
     WczytywanieComponent,
     ZwierzeComponent,
     ListaAdopcjiComponent,
-    FormularzAdopcjiComponent
+    FormularzAdopcjiComponent,
+    PotwierdzenieComponent,
+    ZwierzeInfoPanelComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MessagesModule,
+    MessageModule,
+    GrowlModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     ClickOutsideModule,
     AsyncLocalStorageModule,
+    ConfirmDialogModule,
     RouterModule.forRoot(
       appRoutes
     )
   ],
-  providers: [RestService, StateService, PdfService, AuthService, AdopcjaService, AuthGuardLoginPage, AuthGuard, FileService, ZwierzeService],
+  providers: [RestService, StateService, ConfirmationService, AppMessageService, PdfService, AuthService, AdopcjaService, AuthGuardLoginPage, AuthGuard, FileService, ZwierzeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

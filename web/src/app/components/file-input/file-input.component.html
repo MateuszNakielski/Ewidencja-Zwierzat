@@ -1,4 +1,10 @@
 <label class="input-file" [class.maly]="maly">
   <input type="file" #fileInput (change)="upload()"/>
-  Kliknij, by wybrać plik...
+  <span *ngIf="!wybrane">
+    Kliknij, by wybrać plik...
+  </span>
+  <span *ngIf="wybrane">
+    Wybrano plik {{wybrane}}
+  </span>
+
 </label>

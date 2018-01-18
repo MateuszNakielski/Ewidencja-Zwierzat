@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {Zwierze} from '../../model/zwierze';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {StateService} from '../../services/state.service';
 import {ZwierzeParam} from '../../model/zwierzeParam';
 import {ZwierzeService} from '../../services/zwierze.service';
 import {PageComponent} from '../../components/page/page.component';
 import {Location} from '@angular/common';
+import {Message} from 'primeng/primeng';
+import {AppMessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-wyszukiwarka',
@@ -18,12 +19,14 @@ export class WyszukiwarkaComponent implements OnInit {
   gatunek = '';
   rasa = '';
 
+  msgs: Message[];
+
   odszukano = false;
   odszukaneZwierzeta = [];
 
   form: FormGroup;
 
-  constructor(private location: Location, private fb: FormBuilder, private stateServ: StateService, private zwServ: ZwierzeService) { // <--- inject FormBuilder
+  constructor(private location: Location, private fb: FormBuilder, private stateServ: StateService, private zwServ: ZwierzeService) {
     this.createForm();
   }
 
@@ -81,7 +84,7 @@ export class WyszukiwarkaComponent implements OnInit {
         this.page.wczytywanie = false;
       });
     } else {
-      //TODO: pokaż komunikat, że należy wybrać jakiś parametr.
+      this.msgs = [{severity:'warn', summary:'Błędnie wprowadzone dane', detail:'Należy podać przynajmniej jeden parametr'}];
     }
   }
 
