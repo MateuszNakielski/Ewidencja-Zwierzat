@@ -87,11 +87,11 @@ public class ZwierzeService implements IZwierzeService{
     public List<ZwierzeDTO> pobierzZwierzeta(String gatunek, String rasa, String imie, Integer wiek) {
         Stream<Zwierze> stream = zwierzeRepository.findAll().stream().filter(z -> !z.getAdoptowany());
         if(gatunek != null)
-            stream = stream.filter(z -> z.getGatunek().equals(gatunek));
+            stream = stream.filter(z -> z.getGatunek().toLowerCase().contains(gatunek.toLowerCase()));
         if(rasa != null)
-            stream = stream.filter(z -> z.getRasa().equals(rasa));
+            stream = stream.filter(z -> z.getRasa().toLowerCase().contains(rasa.toLowerCase()));
         if(imie != null)
-            stream = stream.filter(z -> z.getImie().equals(imie));
+            stream = stream.filter(z -> z.getImie().toLowerCase().contains(imie.toLowerCase()));
         if(wiek != null)
             stream = stream.filter(z -> z.getWiek().equals(wiek));
 
